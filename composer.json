@@ -1,0 +1,29 @@
+{
+  "name" : "ellingham-technologies/phpusersystem",
+  "type" : "library",
+  "license": "MIT",
+  "description": "Another User Management Solution for PHP, simplified.",
+  "authors": [
+	{
+	  "name": "Ellingham Technologies Ltd",
+	  "email": "dev@ellinghamtech.co.uk"
+	}
+  ],
+  "require": {
+	"php": ">=7.1.0",
+	"ext-pdo": "*",
+	"ellingham-technologies/phphelpers" : ">=0.4.0"
+  },
+  "suggest": {
+	"database" : "You need SQLite or MySQL/MariaDB to use this library",
+	"updated": "Ensure you check UPDATES.md for any database or breaking changes"
+  },
+  "autoload": {
+	"psr-4": {
+	  "EllinghamTech\\PHPUserSystem\\": "src/EllinghamTech/PHPUserSystem/"
+	}
+  },
+  "require-dev": {
+	"phpunit/phpunit" : "^7"
+  }
+}

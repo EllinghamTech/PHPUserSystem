@@ -1,0 +1,89 @@
+<?php
+/***************************************************************************************************
+ * Copyright (c) 2019. Ellingham Technologies Ltd
+ * Website: https://ellinghamtech.co.uk
+ * Developer Site: https://ellingham.dev
+ *
+ * MIT License
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ **************************************************************************************************/
+
+namespace EllinghamTech\PHPUserSystem\ObjectControllers;
+
+use EllinghamTech\PHPUserSystem\UserSystem;
+
+class UserToken
+{
+	/**
+	 * Gets a token by token value, NULL if token does not exist
+	 *
+	 * @param string $token
+	 *
+	 * @return null|\EllinghamTech\PHPUserSystem\ObjectModels\UserToken
+	 * @throws \Exception
+	 */
+	public static function getToken(string $token) : ?\EllinghamTech\PHPUserSystem\ObjectModels\UserToken
+	{
+		$tokenObj = new \EllinghamTech\PHPUserSystem\ObjectModels\UserToken(null);
+		$db = UserSystem::getDb('UsersTokens');
+
+		$sql = 'SELECT * FROM users_tokens WHERE token=?';
+		$res = $db->performQuery($sql, $token);
+
+		if(!($tokenRow = $res->fetchArray())) return null;
+		$tokenObj->populate($tokenRow);
+
+		return $tokenObj;
+	}
+
+	/**
+	 * Creates a new token
+	 *
+	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserToken
+	 * @throws \Exception
+	 */
+	public static function create() : \EllinghamTech\PHPUserSystem\ObjectModels\UserToken
+	{
+		$tokenObj = new \EllinghamTech\PHPUserSystem\ObjectModels\UserToken();
+
+		$tokenObj->token = random_bytes(32); // What if random_bytes throws an Exception?
+		$tokenObj->expires = time() + 172800;
+		$tokenObj->valid = true;
+
+		return $tokenObj;
+	}
+
+	/**
+	 * Saves a token to the database
+	 *
+	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserToken $userToken
+	 *
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserToken $userToken) : bool
+	{
+		$db = UserSystem::getDb('UsersTokens');
+
+		$sql = 'REPLACE INTO users_tokens (token, user_id, token_type, token_expires, token_expired) VALUES (?, ?, ?, ?, ?)';
+		$res = $db->performQuery($sql, array($userToken->token, $userToken->user_id, $userToken->token_type, $userToken->expires, $userToken->valid));
+
+		return $res->isSuccess();
+	}
+};

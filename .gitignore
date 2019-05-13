@@ -1,0 +1,16 @@
+# Idea Directory
+.idea/
+
+# Tests PHPUnit stuff
+phpunit.phar
+.phpunit.result.cache
+
+## Composer
+vendor/
+
+## Local Data directory
+/data/
+
+## Samples and Tests configuration/sensitive documents
+samples/phphead.php
+tests/data/data.sqlite3
