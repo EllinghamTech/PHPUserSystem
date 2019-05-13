@@ -28,7 +28,7 @@ namespace EllinghamTech\PHPUserSystem\Session;
 
 use EllinghamTech\PHPUserSystem\ObjectModels\User;
 
-interface ISession
+interface ISession extends \EllinghamTech\Session\IBasicSession
 {
 	public function __construct();
 	public function userLogin(int $user_id) : bool;

@@ -30,7 +30,7 @@ use EllinghamTech\PHPUserSystem\ObjectModels\User;
 use EllinghamTech\PHPUserSystem\UserFactory;
 use EllinghamTech\Session\IBasicSession;
 
-class PHPSession implements ISession, IBasicSession
+class PHPSession implements ISession
 {
 	public $logged_in = false;
 	public $user_id = null;
