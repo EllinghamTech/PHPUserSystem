@@ -1,6 +1,9 @@
 # Ellingham Tech: PHP User System
 [![Build Status](https://travis-ci.org/EllinghamTech/PHPUserSystem.svg?branch=master)](https://travis-ci.org/EllinghamTech/PHPUserSystem)
 [![codecov](https://codecov.io/gh/EllinghamTech/PHPUserSystem/branch/master/graph/badge.svg)](https://codecov.io/gh/EllinghamTech/PHPUserSystem)
+[![Latest Stable Version](https://poser.pugx.org/ellingham-technologies/phpxdoc/v/stable)](https://packagist.org/packages/ellingham-technologies/phpxdoc)
+[![Latest Unstable Version](https://poser.pugx.org/ellingham-technologies/phpxdoc/v/unstable)](https://packagist.org/packages/ellingham-technologies/phpxdoc)
+[![Tested PHP Versions](https://img.shields.io/badge/php-%3E%3D7.1.0-green.svg)](https://www.php.net/releases/)
 
 A user management solution for PHP.  It could be said that this is a framework.  But it only deals
 with user management.  The rest is up to you.
