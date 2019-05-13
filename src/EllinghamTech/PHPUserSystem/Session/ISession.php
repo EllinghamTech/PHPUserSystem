@@ -26,12 +26,14 @@
 
 namespace EllinghamTech\PHPUserSystem\Session;
 
+use EllinghamTech\PHPUserSystem\ObjectModels\User;
+
 interface ISession
 {
 	public function __construct();
 	public function userLogin(int $user_id) : bool;
 	public function userLogout() : bool;
 	public function userLogoutAll() : bool;
-
+	public function user() : ?User;
 	public function isLoggedIn() : bool;
 };
