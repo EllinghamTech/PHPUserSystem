@@ -28,7 +28,6 @@ namespace EllinghamTech\PHPUserSystem\Session;
 
 use EllinghamTech\PHPUserSystem\ObjectModels\User;
 use EllinghamTech\PHPUserSystem\UserFactory;
-use EllinghamTech\Session\IBasicSession;
 
 class PHPSession implements ISession
 {
@@ -61,10 +60,6 @@ class PHPSession implements ISession
 		}
 	}
 
-	/**
-	 * @return User|null
-	 * @throws \Exception
-	 */
 	public function user() : ?User
 	{
 		if(!$this->logged_in) return null;
@@ -109,6 +104,11 @@ class PHPSession implements ISession
 	public function isLoggedIn() : bool
 	{
 		return $this->logged_in;
+	}
+
+	public function getUserId() : ?int
+	{
+		return $this->user_id;
 	}
 
 	public function setSessionMessage(string $name, string $value) : bool

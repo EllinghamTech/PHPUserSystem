@@ -27,8 +27,9 @@
 namespace EllinghamTech\PHPUserSystem\Session;
 
 use EllinghamTech\PHPUserSystem\ObjectModels\User;
+use EllinghamTech\Session\IBasicSession;
 
-interface ISession extends \EllinghamTech\Session\IBasicSession
+interface ISession extends IBasicSession
 {
 	public function __construct();
 	public function userLogin(int $user_id) : bool;
@@ -36,4 +37,5 @@ interface ISession extends \EllinghamTech\Session\IBasicSession
 	public function userLogoutAll() : bool;
 	public function user() : ?User;
 	public function isLoggedIn() : bool;
+	public function getUserId() : ?int;
 };
