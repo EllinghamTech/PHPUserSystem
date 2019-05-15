@@ -24,12 +24,15 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+use EllinghamTech\PHPUserSystem\Helpers\UserHelpers;
+use EllinghamTech\PHPUserSystem\UserFactory;
+
 require('../phphead.php');
 
-if($userSystem->general->checkIfUserNameExists($_POST['user_name']))
+if(UserHelpers::checkIfUserNameExists($_POST['user_name']))
 	die('Username already exists');
 
-if($userSystem->general->checkIfUserEmailExists($_POST['user_email']))
+if(UserHelpers::checkIfUserEmailExists($_POST['user_email']))
 	die('Email already exists');
 
 // Now we know the user is unique, we should verify some inputs
@@ -40,7 +43,7 @@ if(!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL))
 // You should also check other properties, e.g. limit the username to alphanumeric, etc.
 
 // Use the factory to create a new user object
-$user = $userSystem->factory->newUser();
+$user = UserFactory::newUser();
 
 // Assign some details
 $user->user_name = $_POST['user_name'];

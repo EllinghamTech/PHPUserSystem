@@ -24,10 +24,13 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+use EllinghamTech\PHPUserSystem\UserFactory;
+use EllinghamTech\PHPUserSystem\UserSystem;
+
 require('../phphead.php');
 
 // Use the factory to get the user object
-$user = $userSystem->factory->getUserByUserName($_POST['user_name']);
+$user = UserFactory::getUserByUserName($_POST['user_name']);
 
 // We can also get by email and mobile, but you must ensure the field you are searching is unique
 
@@ -38,6 +41,6 @@ if(!$user->verifyPassword($_POST['user_password']))
 // We var_dump here - don't do this in production!
 // Logs the user in.  This method is dangerous if used in the wrong place,
 // make sure it is impossible to call without verification
-var_dump($userSystem->session->userLogin($user->user_id));
+var_dump(UserSystem::session()->userLogin($user->user_id));
 
 die('<a href="../index.php">Success!  Back to samples index</a>');

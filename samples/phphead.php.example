@@ -56,4 +56,4 @@ $template = new Template('Ellingham Tech: PHPUserSystem Samples');
 $database = new SQLite();
 $database->connect(__DIR__.'/../data/ellingham_users.sqlite3');
 
-$userSystem = new UserSystem($database);
+UserSystem::init($database);

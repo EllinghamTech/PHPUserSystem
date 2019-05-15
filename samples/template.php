@@ -11,6 +11,9 @@
 		<nav>
 			<ul>
 				<?php
+
+				use EllinghamTech\PHPUserSystem\UserSystem;
+
 				foreach($template->breadcrumb as $navItem)
 				{
 					echo '<li><a href="', $navItem[0], '">', $navItem[1], '</a></li>';
@@ -28,12 +31,12 @@
 			<table>
 				<tr>
 					<td><b>Logged In:</b></td>
-					<td><?php echo ($userSystem->session->isLoggedIn() ? 'Yes' : 'No'); ?></td>
+					<td><?php echo (UserSystem::Session()->isLoggedIn() ? 'Yes' : 'No'); ?></td>
 				</tr>
 				<?php
-				if($userSystem->session->isLoggedIn()) :
+				if(UserSystem::Session()->isLoggedIn()) :
 
-				$user = $userSystem->session->user();
+				$user = UserSystem::Session()->user();
 				?>
 				<tr>
 					<td><b>Username:</b></td>

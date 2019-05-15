@@ -24,11 +24,11 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+use EllinghamTech\PHPUserSystem\Helpers\SessionHelpers;
+
 require('../phphead.php');
 
-$sessionHelper = new EllinghamTech\PHPUserSystem\Helpers\SessionHelpers($userSystem);
-
-$success = $sessionHelper->tryLoginUserName($_POST['user_name'], $_POST['user_password']);
+$success = SessionHelpers::tryLoginUserName($_POST['user_name'], $_POST['user_password']);
 
 if($success)
 	die('<a href="../index.php">Success!  Back to samples index</a>');

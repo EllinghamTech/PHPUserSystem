@@ -24,8 +24,10 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+use EllinghamTech\PHPUserSystem\UserSystem;
+
 require('../phphead.php');
 
-var_dump($userSystem->session->userLogout());
+var_dump(UserSystem::session()->userLogout());
 
 die('<a href="../index.php">Success!  Return to samples index</a>');
