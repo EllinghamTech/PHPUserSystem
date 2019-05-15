@@ -26,6 +26,9 @@
 
 namespace EllinghamTech\PHPUserSystem\InternalAbstract;
 
+use DateInterval;
+use DateTime;
+
 abstract class Limit
 {
 	/** @var int The User ID */
@@ -105,26 +108,26 @@ abstract class Limit
 		switch($this->limit_refresh_interval_unit)
 		{
 			case self::LIMIT_REFRESH_DAY:
-				$dateInterval = new \DateInterval('P'.$amount.'D');
+				$dateInterval = new DateInterval('P'.$amount.'D');
 				break;
 			case self::LIMIT_REFRESH_WEEK:
-				$dateInterval = new \DateInterval('P'.$amount.'W');
+				$dateInterval = new DateInterval('P'.$amount.'W');
 				break;
 			case self::LIMIT_REFRESH_MONTH:
-				$dateInterval = new \DateInterval('P'.$amount.'M');
+				$dateInterval = new DateInterval('P'.$amount.'M');
 				break;
 			case self::LIMIT_REFRESH_QUARTER:
-				$dateInterval = new \DateInterval('P'.($amount * 3).'M');
+				$dateInterval = new DateInterval('P'.($amount * 3).'M');
 				break;
 			case self::LIMIT_REFRESH_YEAR:
-				$dateInterval = new \DateInterval('P'.$amount.'Y');
+				$dateInterval = new DateInterval('P'.$amount.'Y');
 				break;
 			default:
-				$dateInterval = new \DateInterval('PT'.$amount.'S');
+				$dateInterval = new DateInterval('PT'.$amount.'S');
 				break;
 		}
 
-		$date = new \DateTime('@'.$timestamp, new \DateTimeZone('UTC'));
+		$date = new DateTime('@'.$timestamp, new \DateTimeZone('UTC'));
 		$date->add($dateInterval);
 		return $date->getTimestamp();
 	}
