@@ -31,12 +31,12 @@ use EllinghamTech\PHPUserSystem\UserFactory;
 
 class PHPSession implements ISession
 {
-	public $logged_in = false;
-	public $user_id = null;
-	public $session_created = null;
-	public $session = null;
+	protected $logged_in = false;
+	protected $user_id = null;
+	protected $session_created = null;
+	protected $session = null;
 
-	public function __construct()
+	public function init() : void
 	{
 		@session_start();
 

@@ -41,22 +41,14 @@ class UserSystem
 	 */
 	protected static $session = null;
 
-	/** @var General */
-	protected static $general = null;
-
-	public const PHPSessions = 'phpsession';
-	public const DBSessions = 'dbsession';
-
 	/**
 	 * UserSystem initialiser.
 	 *
 	 * @param Wrapper|Wrapper[] $db
-	 * @param string $sessionType
+	 * @param ISession|null $session
 	 */
-	public static function init($db, string $sessionType=self::PHPSessions)
+	public static function init($db, ISession $session = null) : void
 	{
-		self::$general = new General();
-
 		if(!is_array($db))
 		{
 			self::setDb($db);
@@ -69,18 +61,19 @@ class UserSystem
 			}
 		}
 
-		switch($sessionType)
-		{
-			case self::PHPSessions:
-				self::$session = new PHPSession();
-		}
+		if($session === null)
+			self::$session = new PHPSession();
+		else
+			self::$session = $session;
+
+		self::$session->init();
 	}
 
 	/**
 	 * @param object $db
 	 * @param string|null $for
 	 */
-	public static function setDb($db, ?string $for=null) : void
+	public static function setDb($db, ?string $for = null) : void
 	{
 		if($for == null) $for = 'default';
 
@@ -92,12 +85,14 @@ class UserSystem
 	 *
 	 * @return Wrapper
 	 */
-	public static function getDb(?string $for) : ?Wrapper
+	public static function getDb(?string $for = null) : ?Wrapper
 	{
 		if($for != null && isset(self::$db[$for]))
 			return self::$db[$for];
-		else
+		else if(isset(self::$db['default']))
 			return self::$db['default'];
+		else
+			return null;
 	}
 
 	public static function session() : ?ISession

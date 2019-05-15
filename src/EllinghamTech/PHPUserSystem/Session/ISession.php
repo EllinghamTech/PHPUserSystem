@@ -31,11 +31,52 @@ use EllinghamTech\Session\IBasicSession;
 
 interface ISession extends IBasicSession
 {
-	public function __construct();
+	/**
+	 * Initialise the session.  Is called by UserSystem one UserSystem initialisation.
+	 */
+	public function init() : void;
+
+	/**
+	 * Logs a user in by user ID.  CHECK THE USERS PASSWORD, ETC BEFORE USING THIS METHOD.
+	 *
+	 * @param int $user_id
+	 *
+	 * @return bool
+	 */
 	public function userLogin(int $user_id) : bool;
+
+	/**
+	 * Logs the user out
+	 *
+	 * @return bool
+	 */
 	public function userLogout() : bool;
+
+	/**
+	 * Logs the user out of all active sessions for the current user
+	 *
+	 * @return bool
+	 */
 	public function userLogoutAll() : bool;
+
+	/**
+	 * If logged in, gets the user object
+	 *
+	 * @return User|null
+	 */
 	public function user() : ?User;
+
+	/**
+	 * Returns true if the current session has an active user login
+	 *
+	 * @return bool
+	 */
 	public function isLoggedIn() : bool;
+
+	/**
+	 * Gets the user ID
+	 *
+	 * @return int|null
+	 */
 	public function getUserId() : ?int;
 };

@@ -26,6 +26,9 @@
 
 namespace EllinghamTech\PHPUserSystem;
 
+/**
+ * @deprecated 1.0 Do not use, refer to Helpers/ instead
+ */
 class General
 {
 	/**
@@ -35,6 +38,7 @@ class General
 	 *
 	 * @return bool
 	 * @throws \Exception
+	 * @deprecated 1.0 Do not use, refer to Helpers/ instead
 	 */
 	public function checkIfUserNameExists(string $user_name) : bool
 	{
@@ -48,6 +52,7 @@ class General
 	 *
 	 * @return bool
 	 * @throws \Exception
+	 * @deprecated 1.0 Do not use, refer to Helpers/ instead
 	 */
 	public function checkIfUserEmailExists(string $user_email) : bool
 	{
@@ -62,6 +67,8 @@ class General
 	 * DO NOT USE
 	 *
 	 * @param string $user_mobile
+	 *
+	 * @deprecated 1.0 Do not use, refer to Helpers/ instead
 	 *
 	 * @return bool
 	 * @throws \Exception
