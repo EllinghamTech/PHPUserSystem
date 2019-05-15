@@ -26,6 +26,8 @@
 
 namespace EllinghamTech\PHPUserSystem\AbstractModels;
 
+use EllinghamTech\PHPUserSystem\InternalAbstract\Permission;
+
 /**
  * Abstract class for granular permissions within a collection.
  *
@@ -42,7 +44,7 @@ namespace EllinghamTech\PHPUserSystem\AbstractModels;
  *
  * @package EllinghamTech\PHPUserSystem\AbstractModels
  */
-abstract class UserResourcePermissions extends \EllinghamTech\PHPUserSystem\InternalAbstract\Permission
+abstract class UserResourcePermissions extends Permission
 {
 	/** @var int The user ID */
 	public $user_id;

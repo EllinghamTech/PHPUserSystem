@@ -26,24 +26,8 @@
 
 namespace EllinghamTech\PHPUserSystem\AbstractModels;
 
-abstract class UserCustomPermissions
+use EllinghamTech\PHPUserSystem\InternalAbstract\Permission;
+
+abstract class UserCustomPermissions extends Permission
 {
-	public const NO_PERMISSION = 0;
-	public const EXECUTE_PERMISSION = 1;
-	public const READ_PERMISSION = 2;
-	public const MODIFY_PERMISSION = 4;
-	public const WRITE_PERMISSION = 8;
-	public const DELETE_PERMISSION = 16;
-	public const SPECIAL_PERMISSION = 32;
-
-	public const CUSTOM_PERMISSION_1 = 64;
-	public const CUSTOM_PERMISSION_2 = 128;
-	public const CUSTOM_PERMISSION_3 = 256;
-	public const CUSTOM_PERMISSION_4 = 512;
-	public const CUSTOM_PERMISSION_5 = 1024;
-	public const CUSTOM_PERMISSION_6 = 2048;
-
-	public function __construct()
-	{
-	}
 };
