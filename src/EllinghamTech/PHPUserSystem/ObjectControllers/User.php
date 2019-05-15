@@ -44,7 +44,6 @@ class User
 	public static function loadFromUserId(int $user_id) : ?\EllinghamTech\PHPUserSystem\ObjectModels\User
 	{
 		$db = UserSystem::getDb('Users');
-		$user = array();
 
 		$sql = 'SELECT * FROM users WHERE user_id=?';
 		$res = $db->performQuery($sql, $user_id);
@@ -65,7 +64,6 @@ class User
 	public static function loadFromUserName(string $user_name) : ?\EllinghamTech\PHPUserSystem\ObjectModels\User
 	{
 		$db = UserSystem::getDb('Users');
-		$user = array();
 
 		$sql = 'SELECT * FROM users WHERE user_name=?';
 		$res = $db->performQuery($sql, $user_name);
@@ -86,7 +84,6 @@ class User
 	public static function loadFromUserEmail(string $user_email) : ?\EllinghamTech\PHPUserSystem\ObjectModels\User
 	{
 		$db = UserSystem::getDb('Users');
-		$user = array();
 
 		$sql = 'SELECT * FROM users WHERE user_email=?';
 		$res = $db->performQuery($sql, $user_email);
