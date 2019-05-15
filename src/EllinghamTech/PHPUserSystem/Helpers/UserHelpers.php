@@ -38,7 +38,7 @@ class UserHelpers
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public function checkIfUserNameExists(string $user_name) : bool
+	public static function checkIfUserNameExists(string $user_name) : bool
 	{
 		return User::checkIfExists('user_name', $user_name);
 	}
@@ -51,7 +51,7 @@ class UserHelpers
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public function checkIfUserEmailExists(string $user_email) : bool
+	public static function checkIfUserEmailExists(string $user_email) : bool
 	{
 		return User::checkIfExists('user_email', $user_email);
 	}
@@ -68,7 +68,7 @@ class UserHelpers
 	 * @return bool
 	 * @throws \Exception
 	 */
-	public function checkIfUserMobileExists(string $user_mobile) : bool
+	public static function checkIfUserMobileExists(string $user_mobile) : bool
 	{
 		return User::checkIfExists('user_mobile', $user_mobile);
 	}

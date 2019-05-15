@@ -41,7 +41,7 @@ class UserLimitsHelpers
 	 * @return int|null
 	 * @throws \Exception
 	 */
-	public function doAllRequiredRefreshes() : int
+	public static function doAllRequiredRefreshes() : int
 	{
 		$count = 0;
 		$db = UserSystem::getDb('users_limits');
