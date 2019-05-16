@@ -64,8 +64,8 @@ class UserPermission
 		$sql = 'SELECT * FROM users_permissions WHERE user_id=? AND permission_name=?';
 		$res = $db->performQuery($sql, array($user_id, $permissionName));
 
-		if($res->numRows() == 1)
-			$permissionObj->populate($res->fetchArray());
+		if($row = $res->fetchArray())
+			$permissionObj->populate($row);
 
 		return $permissionObj;
 	}
