@@ -27,6 +27,7 @@
 namespace EllinghamTech\PHPUserSystem\ObjectModels;
 
 use EllinghamTech\PHPUserSystem\Exceptions\ObjectNotSaved;
+use EllinghamTech\PHPUserSystem\UserSystem;
 
 class User
 {
@@ -107,7 +108,7 @@ class User
 	 */
 	public function setPassword(string $password) : void
 	{
-		$this->user_password = password_hash($password, PASSWORD_ARGON2I);
+		$this->user_password = password_hash($password, UserSystem::$passwordHashAlgo);
 	}
 
 	/**

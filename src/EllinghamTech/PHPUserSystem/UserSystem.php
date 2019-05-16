@@ -36,6 +36,8 @@ class UserSystem
 
 	protected static $db = array();
 
+	public static $passwordHashAlgo = null;
+
 	/**
 	 * @var ISession
 	 */
@@ -67,6 +69,12 @@ class UserSystem
 			self::$session = $session;
 
 		self::$session->init();
+
+		if(self::$passwordHashAlgo === null)
+		{
+			if(defined('PASSWORD_ARGON2I')) self::$passwordHashAlgo = PASSWORD_ARGON2I;
+			else self::$passwordHashAlgo = PASSWORD_DEFAULT;
+		}
 	}
 
 	/**
