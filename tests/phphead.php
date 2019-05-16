@@ -124,6 +124,19 @@ function initUserSystem() : void
 			ON DELETE CASCADE
 		)');
 
+		$database->performQuery('CREATE TABLE IF NOT EXISTS users_profiles (
+			user_id INTEGER PRIMARY KEY,
+			profile_id TEXT UNIQUE,
+			display_name TEXT,
+			full_name TEXT,
+			profile_summary TEXT,
+			profile_image TEXT,
+			
+			CONSTRAINT fk_users_profiles_on_users FOREIGN KEY (user_id) REFERENCES users (user_id)
+			  ON UPDATE CASCADE
+			  ON DELETE CASCADE
+		);');
+
 		$database->performQuery('CREATE TABLE IF NOT EXISTS users_sessions (
 		  session_id TEXT PRIMARY KEY,
 		  user_id INTEGER,
