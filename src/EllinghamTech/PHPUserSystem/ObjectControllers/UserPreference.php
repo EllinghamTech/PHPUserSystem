@@ -63,8 +63,8 @@ class UserPreference
 		$sql = 'SELECT * FROM users_preferences WHERE user_id=? AND preference_name=?';
 		$res = $db->performQuery($sql, array($user_id, $preferenceName));
 
-		if($res->numRows() == 1)
-			$preferenceObj->populate($res->fetchArray());
+		if($row = $res->fetchArray())
+			$preferenceObj->populate($row);
 
 		return $preferenceObj;
 	}

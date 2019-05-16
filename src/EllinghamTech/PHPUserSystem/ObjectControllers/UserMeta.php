@@ -63,10 +63,9 @@ class UserMeta
 		$sql = 'SELECT * FROM users_meta WHERE user_id=? AND meta_name=?';
 		$res = $db->performQuery($sql, array($user_id, $metaName));
 
-		if($res->numRows() == 1)
-		{
-			$metaObj->populate($res->fetchArray());
-		}
+		if($row = $res->fetchArray())
+			$metaObj->populate($row);
+
 		else if($res->numRows() > 1)
 		{
 			while($row = $res->fetchArray())
