@@ -55,16 +55,19 @@ class UserToken
 	/**
 	 * Creates a new token
 	 *
+	 * @param string|null $token_type
+	 *
 	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserToken
 	 * @throws \Exception
 	 */
-	public static function create() : \EllinghamTech\PHPUserSystem\ObjectModels\UserToken
+	public static function create(?string $token_type = null) : \EllinghamTech\PHPUserSystem\ObjectModels\UserToken
 	{
 		$tokenObj = new \EllinghamTech\PHPUserSystem\ObjectModels\UserToken();
 
 		$tokenObj->token = random_bytes(32); // What if random_bytes throws an Exception?
 		$tokenObj->expires = time() + 172800;
 		$tokenObj->valid = true;
+		$tokenObj->token_type = $token_type;
 
 		return $tokenObj;
 	}

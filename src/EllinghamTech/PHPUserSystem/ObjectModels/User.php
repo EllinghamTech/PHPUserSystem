@@ -208,4 +208,42 @@ class User
 		if($this->user_id == null) throw new ObjectNotSaved();
 		return \EllinghamTech\PHPUserSystem\ObjectControllers\UserProfile::loadFromUserId($this->user_id);
 	}
+
+	/**
+	 * Gets a user token.  If the user token does not exists, or does not belong
+	 * to this user, then NULL is returned.
+	 *
+	 * @param string $token
+	 *
+	 * @return UserToken|null
+	 * @throws ObjectNotSaved
+	 * @throws \Exception
+	 */
+	public function getUserToken(string $token) : ?UserToken
+	{
+		if($this->user_id == null) throw new ObjectNotSaved();
+
+		$tokenObject = \EllinghamTech\PHPUserSystem\ObjectControllers\UserToken::getToken($token);
+
+		if($tokenObject->user_id != $this->user_id) return null;
+		else return $tokenObject;
+	}
+
+	/**
+	 * Creates a user token for this user.
+	 *
+	 * @param string $token_type
+	 *
+	 * @return UserToken
+	 * @throws ObjectNotSaved
+	 * @throws \Exception
+	 */
+	public function createUserToken(?string $token_type = null) : UserToken
+	{
+		if($this->user_id == null) throw new ObjectNotSaved();
+
+		$tokenObj = \EllinghamTech\PHPUserSystem\ObjectControllers\UserToken::create($token_type);
+		$tokenObj->user_id = $this->user_id;
+		return $tokenObj;
+	}
 }

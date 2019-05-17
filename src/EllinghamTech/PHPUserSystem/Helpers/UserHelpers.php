@@ -26,7 +26,10 @@
 
 namespace EllinghamTech\PHPUserSystem\Helpers;
 
-use EllinghamTech\PHPUserSystem\ObjectControllers\User;
+use EllinghamTech\PHPUserSystem\ObjectControllers\User as UserController;
+use EllinghamTech\PHPUserSystem\ObjectControllers\UserToken as UserTokenController;
+use EllinghamTech\PHPUserSystem\ObjectModels\User;
+use EllinghamTech\PHPUserSystem\ObjectModels\UserToken;
 
 class UserHelpers
 {
@@ -40,7 +43,7 @@ class UserHelpers
 	 */
 	public static function checkIfUserNameExists(string $user_name) : bool
 	{
-		return User::checkIfExists('user_name', $user_name);
+		return UserController::checkIfExists('user_name', $user_name);
 	}
 
 	/**
@@ -53,7 +56,7 @@ class UserHelpers
 	 */
 	public static function checkIfUserEmailExists(string $user_email) : bool
 	{
-		return User::checkIfExists('user_email', $user_email);
+		return UserController::checkIfExists('user_email', $user_email);
 	}
 
 	/**
@@ -70,6 +73,45 @@ class UserHelpers
 	 */
 	public static function checkIfUserMobileExists(string $user_mobile) : bool
 	{
-		return User::checkIfExists('user_mobile', $user_mobile);
+		return UserController::checkIfExists('user_mobile', $user_mobile);
+	}
+
+	public static function forgotPassword(User $user) : ?UserToken
+	{
+		return $user->createUserToken('forgot_password');
+	}
+
+	public static function forgotPasswordByUserId(int $user_id) : ?UserToken
+	{
+		$tokenObj = UserTokenController::create('forgot_password');
+		$tokenObj->user_id = $user_id;
+		return $tokenObj;
+	}
+
+	public static function forgotPasswordByUserName(string $user_name) : ?UserToken
+	{
+		$user = UserController::loadFromUserName($user_name);
+		if($user === null) return null;
+		return self::forgotPassword($user);
+	}
+
+	public static function forgotPasswordByUserEmail(string $user_email) : ?UserToken
+	{
+		$user = UserController::loadFromUserEmail($user_email);
+		if($user === null) return null;
+		return self::forgotPassword($user);
+	}
+
+	public static function getUserByForgotPasswordToken(string $token) : ?User
+	{
+		$userToken = UserTokenController::getToken($token);
+
+		if($userToken === null) return null;
+		if(strcmp($userToken->token_type, 'forgot_password') !== 0) return null;
+
+		$user = $userToken->getUser();
+
+		if($user === null) return null;
+		return $user;
 	}
 };
