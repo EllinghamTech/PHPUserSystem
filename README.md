@@ -36,7 +36,16 @@ $currentUser = UserSystem::session()->user();
 ```
 
 ## Database support
-Currently support MySQL and SQLite using the Database wrappers provided in EllinghamTech PHPHelpers.
+Currently supporting MySQL and SQLite using the Database wrappers provided in EllinghamTech PHPHelpers.
+
+If you are already using PDO, you do not need to create a new connection.  Simply use:
+```php
+use EllinghamTech\PHPUserSystem\UserSystem;
+
+$database = new EllinghamTech\Database\SQL\Wrapper(); // MySQL() for MySQL, SQLite() for SQLite
+$database->useExistingConnection($pdoObject);
+UserSystem::init($database);
+```
 
 ## Installation
 ### With Composer
@@ -60,9 +69,10 @@ Note that his library requires [EllinghamTech/PHPHelpers](https://github.com/Ell
 **Currently this has not been tested without composer.**
 
 ## Dependencies
-- PHP 7.2 or above
-- [EllinghamTech/PHPHelpers](https://github.com/EllinghamTech/PHPHelpers). (composer: ellingham-technologies/phphelpers), latest version (>0.4)
+- PHP 7.1 or above
 - PDO (SQL/MySQL or SQLite supported)
+- **Composer Managed:**
+    - [EllinghamTech/PHPHelpers](https://github.com/EllinghamTech/PHPHelpers). (composer: ellingham-technologies/phphelpers), latest version (>0.4)
 
 The EllinghamTech/PHPUserSystem and EllinghamTech/PHPHelpers namespaces include all of the classes required for this library.
 
@@ -72,6 +82,9 @@ See samples/ for details on how to implement these features on your site.
 This library requires a specific set of tables in the database.  You can find the SQL queries to
 create the tables and recommended indexes in MySQL_tables.md and SQLite_tables.md.
 
+We plan to build an installation and update script in the future.  Until then, you will need to make
+manual changes if the tables change.  Ensure you read the release notes before updating.
+
 ## Factory and object initialisation
 Many objects are created by a factory instance.  This removes some of the complexities when setting
 up certain objects correctly.  Other instances can be created by the "parent" instance.
@@ -80,7 +93,7 @@ up certain objects correctly.  Other instances can be created by the "parent" in
 use EllinghamTech\Database\SQL\MySQL;
 use EllinghamTech\PHPUserSystem\UserSystem;
 
-$database = new MySQL(); // Also support SQLite: new SQLite();
+$database = new MySQL(); // Also supports SQLite: new SQLite();
 // Already using PDO?
 // Then use $database->useExistingConnection($pdo_object_here);
 // You can also set the database type with $database->database_type = 'sql';
