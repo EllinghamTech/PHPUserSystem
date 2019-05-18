@@ -87,10 +87,10 @@ class UserSystem
 	}
 
 	/**
-	 * @param object $db
+	 * @param Wrapper $db
 	 * @param string|null $for
 	 */
-	public static function setDb($db, ?string $for = null) : void
+	public static function setDb(Wrapper $db, ?string $for = null) : void
 	{
 		if($for == null) $for = 'default';
 
