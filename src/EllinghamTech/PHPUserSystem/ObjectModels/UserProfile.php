@@ -62,7 +62,7 @@ class UserProfile
 		if(isset($set['profile_id'])) $this->profile_id = $set['profile_id'];
 
 		if(isset($set['display_name'])) $this->display_name = $set['display_name'];
-		if(isset($set['full_name'])) $this->user_id = $set['full_name'];
+		if(isset($set['full_name'])) $this->full_name = $set['full_name'];
 		if(isset($set['profile_summary'])) $this->profile_summary = $set['profile_summary'];
 		if(isset($set['profile_image'])) $this->profile_image = $set['profile_image'];
 	}
