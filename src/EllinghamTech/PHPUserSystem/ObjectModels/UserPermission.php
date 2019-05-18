@@ -90,7 +90,9 @@ class UserPermission extends Permission
 	 * Saves the user permission
 	 *
 	 * @return bool True on success, false on failure.
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function save() : bool
 	{
@@ -101,7 +103,9 @@ class UserPermission extends Permission
 	 * Deletes the user permission
 	 *
 	 * @return bool True on success, false on failure.
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function delete() : bool
 	{

@@ -24,10 +24,16 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+/**
+ * @internal
+ */
 namespace EllinghamTech\PHPUserSystem\ObjectControllers;
 
 use EllinghamTech\PHPUserSystem\UserSystem;
 
+/**
+ * @internal
+ */
 class UserPreference
 {
 	/**
@@ -52,7 +58,9 @@ class UserPreference
 	 * @param string $preferenceName
 	 *
 	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserPreference
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function load(int $user_id, string $preferenceName) : \EllinghamTech\PHPUserSystem\ObjectModels\UserPreference
 	{
@@ -75,7 +83,9 @@ class UserPreference
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserPreference $userPreference
 	 *
 	 * @return bool
-	 * @throws \RuntimeException|\UnexpectedValueException|\Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserPreference $userPreference) : bool
 	{
@@ -93,7 +103,9 @@ class UserPreference
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserPreference $userPreference
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function delete(\EllinghamTech\PHPUserSystem\ObjectModels\UserPreference $userPreference) : bool
 	{

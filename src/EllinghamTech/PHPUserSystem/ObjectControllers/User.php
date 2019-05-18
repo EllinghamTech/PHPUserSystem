@@ -31,6 +31,9 @@ namespace EllinghamTech\PHPUserSystem\ObjectControllers;
 
 use EllinghamTech\PHPUserSystem\UserSystem;
 
+/**
+ * @internal
+ */
 class User
 {
 	/**
@@ -39,7 +42,9 @@ class User
 	 * @param int $user_id
 	 *
 	 * @return null|\EllinghamTech\PHPUserSystem\ObjectModels\User
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function loadFromUserId(int $user_id) : ?\EllinghamTech\PHPUserSystem\ObjectModels\User
 	{
@@ -59,7 +64,9 @@ class User
 	 * @param string $user_name
 	 *
 	 * @return null|\EllinghamTech\PHPUserSystem\ObjectModels\User
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function loadFromUserName(string $user_name) : ?\EllinghamTech\PHPUserSystem\ObjectModels\User
 	{
@@ -79,7 +86,9 @@ class User
 	 * @param string $user_email
 	 *
 	 * @return null|\EllinghamTech\PHPUserSystem\ObjectModels\User
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function loadFromUserEmail(string $user_email) : ?\EllinghamTech\PHPUserSystem\ObjectModels\User
 	{
@@ -109,8 +118,9 @@ class User
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\User $user
 	 *
 	 * @return bool
-	 * @throws \RuntimeException
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\User $user) : bool
 	{
@@ -132,9 +142,10 @@ class User
 	 *
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\User $user
 	 *
-	 * @throws \Exception
-	 *
 	 * @return bool True on success, false or exception on failure
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function update(\EllinghamTech\PHPUserSystem\ObjectModels\User $user) : bool
 	{
@@ -161,9 +172,10 @@ class User
 	 *
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\User $user
 	 *
-	 * @throws \Exception
-	 *
 	 * @return bool True on success
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function insert(\EllinghamTech\PHPUserSystem\ObjectModels\User $user) : bool
 	{
@@ -203,8 +215,9 @@ class User
 	 * @param string $value
 	 *
 	 * @return bool
-	 *
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function checkIfExists(string $field, $value) : bool
 	{

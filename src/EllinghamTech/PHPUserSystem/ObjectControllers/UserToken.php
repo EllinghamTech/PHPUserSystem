@@ -24,10 +24,16 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+/**
+ * @internal
+ */
 namespace EllinghamTech\PHPUserSystem\ObjectControllers;
 
 use EllinghamTech\PHPUserSystem\UserSystem;
 
+/**
+ * @internal
+ */
 class UserToken
 {
 	/**
@@ -36,7 +42,9 @@ class UserToken
 	 * @param string $token
 	 *
 	 * @return null|\EllinghamTech\PHPUserSystem\ObjectModels\UserToken
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function getToken(string $token) : ?\EllinghamTech\PHPUserSystem\ObjectModels\UserToken
 	{
@@ -78,7 +86,9 @@ class UserToken
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserToken $userToken
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserToken $userToken) : bool
 	{

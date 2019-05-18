@@ -71,7 +71,9 @@ class UserProfile
 	 * Saves the user profile
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function save() : bool
 	{
@@ -83,7 +85,9 @@ class UserProfile
 	 *
 	 * @return User
 	 * @throws ObjectNotSaved
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function getUser() : User
 	{

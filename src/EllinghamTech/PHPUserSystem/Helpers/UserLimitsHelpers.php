@@ -39,6 +39,8 @@ class UserLimitsHelpers
 	 * Returns a count of the number of user limits updated.
 	 *
 	 * @return int|null
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 * @throws \Exception
 	 */
 	public static function doAllRequiredRefreshes() : int

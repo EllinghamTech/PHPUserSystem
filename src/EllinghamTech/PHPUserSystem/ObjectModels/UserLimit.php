@@ -34,8 +34,6 @@ class UserLimit extends Limit
 	 * UserLimit constructor.
 	 *
 	 * @param int $user_id
-	 *
-	 * @throws \Exception If database type not supported
 	 */
 	public function __construct(int $user_id)
 	{
@@ -79,8 +77,11 @@ class UserLimit extends Limit
 	}
 
 	/**
-	 * Refresh the user limit
+	 * Refresh the user limits
 	 *
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 * @throws \Exception
 	 */
 	public function doRefresh() : void
@@ -101,6 +102,7 @@ class UserLimit extends Limit
 	 * @param int $value
 	 *
 	 * @return bool
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function drawDown(int $value = 1) : bool
 	{
@@ -111,7 +113,9 @@ class UserLimit extends Limit
 	 * Saves the User Limit to the database.
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function save() : bool
 	{
@@ -122,7 +126,9 @@ class UserLimit extends Limit
 	 * Deletes the user limit from the database.
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function delete() : bool
 	{

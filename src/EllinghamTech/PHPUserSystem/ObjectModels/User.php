@@ -128,7 +128,9 @@ class User
 	 * Saves the user to the Database
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function save() : bool
 	{
@@ -142,7 +144,9 @@ class User
 	 *
 	 * @return UserPermission
 	 * @throws ObjectNotSaved
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function getUserPermission(string $permissionName) : UserPermission
 	{
@@ -158,7 +162,9 @@ class User
 	 *
 	 * @return UserLimit
 	 * @throws ObjectNotSaved
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function getUserLimit(string $limitName, bool $lockForUpdate = false) : UserLimit
 	{
@@ -173,7 +179,9 @@ class User
 	 *
 	 * @return UserPreference
 	 * @throws ObjectNotSaved
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function getUserPreference(string $preferenceName) : UserPreference
 	{
@@ -188,7 +196,9 @@ class User
 	 *
 	 * @return UserMeta
 	 * @throws ObjectNotSaved
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function getUserMeta(string $metaName) : UserMeta
 	{
@@ -201,7 +211,9 @@ class User
 	 *
 	 * @return UserProfile
 	 * @throws ObjectNotSaved
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function getUserProfile() : UserProfile
 	{
@@ -217,7 +229,9 @@ class User
 	 *
 	 * @return UserToken|null
 	 * @throws ObjectNotSaved
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function getUserToken(string $token) : ?UserToken
 	{

@@ -24,10 +24,16 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+/**
+ * @internal
+ */
 namespace EllinghamTech\PHPUserSystem\ObjectControllers;
 
 use EllinghamTech\PHPUserSystem\UserSystem;
 
+/**
+ * @internal
+ */
 class UserProfile
 {
 	/**
@@ -37,7 +43,9 @@ class UserProfile
 	 * @param int $user_id
 	 *
 	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserProfile
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function loadFromUserId(int $user_id) : \EllinghamTech\PHPUserSystem\ObjectModels\UserProfile
 	{
@@ -64,7 +72,9 @@ class UserProfile
 	 * @param string $profile_id
 	 *
 	 * @return null|\EllinghamTech\PHPUserSystem\ObjectModels\UserProfile
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function loadFromProfileId(string $profile_id) : ?\EllinghamTech\PHPUserSystem\ObjectModels\UserProfile
 	{
@@ -86,7 +96,9 @@ class UserProfile
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserProfile $userProfile
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserProfile $userProfile) : bool
 	{

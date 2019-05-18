@@ -34,7 +34,9 @@ class UserFactory
 	 * @param int $user_id
 	 *
 	 * @return ObjectModels\User|null
-	 * @throws \Exception
+	 * @throws Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
 	public static function getUserByUserId(int $user_id): ?ObjectModels\User
 	{
@@ -47,7 +49,9 @@ class UserFactory
 	 * @param string $user_name
 	 *
 	 * @return ObjectModels\User|null
-	 * @throws \Exception
+	 * @throws Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
 	public static function getUserByUserName(string $user_name): ?ObjectModels\User
 	{
@@ -60,7 +64,9 @@ class UserFactory
 	 * @param string $user_email
 	 *
 	 * @return ObjectModels\User|null
-	 * @throws \Exception
+	 * @throws Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
 	public static function getUserByUserEmail(string $user_email): ?ObjectModels\User
 	{
@@ -73,7 +79,9 @@ class UserFactory
 	 * @param string $profile_id
 	 *
 	 * @return ObjectModels\UserProfile|null
-	 * @throws \Exception
+	 * @throws Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
 	public static function getUserProfileByProfileId(string $profile_id): ?ObjectModels\UserProfile
 	{
@@ -86,13 +94,14 @@ class UserFactory
 	 * @param int $user_id
 	 *
 	 * @return ObjectModels\UserProfile|null
-	 * @throws \Exception
+	 * @throws Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
 	public static function getUserProfileByUserId(int $user_id): ?ObjectModels\UserProfile
 	{
 		return ObjectControllers\UserProfile::loadFromUserId($user_id);
 	}
-
 
 	/**
 	 * Creates a new user
@@ -110,7 +119,9 @@ class UserFactory
 	 * @param string $token
 	 *
 	 * @return ObjectModels\UserToken|null
-	 * @throws \Exception
+	 * @throws Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
 	public static function getToken(string $token): ?ObjectModels\UserToken
 	{

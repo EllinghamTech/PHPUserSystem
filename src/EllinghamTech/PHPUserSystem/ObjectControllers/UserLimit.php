@@ -24,10 +24,16 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+/**
+ * @internal
+ */
 namespace EllinghamTech\PHPUserSystem\ObjectControllers;
 
 use EllinghamTech\PHPUserSystem\UserSystem;
 
+/**
+ * @internal
+ */
 class UserLimit
 {
 	/**
@@ -40,7 +46,9 @@ class UserLimit
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserLimit|null $userLimit
 	 *
 	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserLimit
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function loadFromUserIdAndLimitName(int $user_id, string $limitName, bool $lockForUpdate = false, ?\EllinghamTech\PHPUserSystem\ObjectModels\UserLimit $userLimit=null) : \EllinghamTech\PHPUserSystem\ObjectModels\UserLimit
 	{
@@ -91,7 +99,9 @@ class UserLimit
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserLimit $userLimit
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserLimit $userLimit) : bool
 	{
@@ -117,7 +127,9 @@ class UserLimit
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserLimit $userLimit
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function update(\EllinghamTech\PHPUserSystem\ObjectModels\UserLimit $userLimit) : bool
 	{
@@ -143,7 +155,9 @@ class UserLimit
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserLimit $userLimit
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function delete(\EllinghamTech\PHPUserSystem\ObjectModels\UserLimit $userLimit) : bool
 	{
@@ -166,6 +180,7 @@ class UserLimit
 	 * @param int $value
 	 *
 	 * @return bool
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function drawDown(\EllinghamTech\PHPUserSystem\ObjectModels\UserLimit $userLimit, int $value) : bool
 	{

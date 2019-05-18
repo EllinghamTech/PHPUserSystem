@@ -39,7 +39,9 @@ class UserHelpers
 	 * @param string $user_name
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function checkIfUserNameExists(string $user_name) : bool
 	{
@@ -52,7 +54,9 @@ class UserHelpers
 	 * @param string $user_email
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function checkIfUserEmailExists(string $user_email) : bool
 	{
@@ -69,18 +73,36 @@ class UserHelpers
 	 * @param string $user_mobile
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function checkIfUserMobileExists(string $user_mobile) : bool
 	{
 		return UserController::checkIfExists('user_mobile', $user_mobile);
 	}
 
+	/**
+	 * Creates a forgot_password token for the user
+	 *
+	 * @param User $user
+	 *
+	 * @return UserToken|null
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ObjectNotSaved
+	 */
 	public static function forgotPassword(User $user) : ?UserToken
 	{
 		return $user->createUserToken('forgot_password');
 	}
 
+	/**
+	 * Creates a forgot_password token for the user by User ID
+	 *
+	 * @param int $user_id
+	 *
+	 * @return UserToken|null
+	 * @throws \Exception
+	 */
 	public static function forgotPasswordByUserId(int $user_id) : ?UserToken
 	{
 		$tokenObj = UserTokenController::create('forgot_password');
@@ -88,6 +110,17 @@ class UserHelpers
 		return $tokenObj;
 	}
 
+	/**
+	 * Creates a forgot_password token for the user by User Name
+	 *
+	 * @param string $user_name
+	 *
+	 * @return UserToken|null
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ObjectNotSaved
+	 */
 	public static function forgotPasswordByUserName(string $user_name) : ?UserToken
 	{
 		$user = UserController::loadFromUserName($user_name);
@@ -95,6 +128,17 @@ class UserHelpers
 		return self::forgotPassword($user);
 	}
 
+	/**
+	 * Creates a forgot_password token for the user by User Email
+	 *
+	 * @param string $user_email
+	 *
+	 * @return UserToken|null
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ObjectNotSaved
+	 */
 	public static function forgotPasswordByUserEmail(string $user_email) : ?UserToken
 	{
 		$user = UserController::loadFromUserEmail($user_email);
@@ -102,6 +146,18 @@ class UserHelpers
 		return self::forgotPassword($user);
 	}
 
+	/**
+	 * Gets the user object from a forgot_password token, null on failure
+	 * (not found), exception on error.
+	 *
+	 * @param string $token
+	 *
+	 * @return User|null
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\InvalidState
+	 */
 	public static function getUserByForgotPasswordToken(string $token) : ?User
 	{
 		$userToken = UserTokenController::getToken($token);

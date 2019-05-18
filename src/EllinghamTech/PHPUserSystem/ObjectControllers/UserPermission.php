@@ -24,10 +24,16 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+/**
+ * @internal
+ */
 namespace EllinghamTech\PHPUserSystem\ObjectControllers;
 
 use EllinghamTech\PHPUserSystem\UserSystem;
 
+/**
+ * @internal
+ */
 class UserPermission
 {
 	/**
@@ -53,7 +59,9 @@ class UserPermission
 	 * @param string $permissionName
 	 *
 	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserPermission
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function load(int $user_id, string $permissionName) : \EllinghamTech\PHPUserSystem\ObjectModels\UserPermission
 	{
@@ -76,7 +84,9 @@ class UserPermission
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserPermission $userPermission
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserPermission $userPermission) : bool
 	{
@@ -94,7 +104,9 @@ class UserPermission
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserPermission $userPermission
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function delete(\EllinghamTech\PHPUserSystem\ObjectModels\UserPermission $userPermission) : bool
 	{

@@ -76,7 +76,7 @@ class UserToken
 	 * Immediately invalidates this token (and saves to the database)
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws InvalidState
 	 */
 	function invalidate() : bool
 	{
@@ -104,8 +104,10 @@ class UserToken
 	 * Gets the user object.  NULL on error or user doesn't exist.
 	 *
 	 * @return User|null
-	 * @throws \Exception
 	 * @throws InvalidState When the token has not been setup correctly to preform this method
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public function getUser() : ?User
 	{

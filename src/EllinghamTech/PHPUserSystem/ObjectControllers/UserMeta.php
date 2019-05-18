@@ -24,10 +24,16 @@
  * SOFTWARE.
  **************************************************************************************************/
 
+/**
+ * @internal
+ */
 namespace EllinghamTech\PHPUserSystem\ObjectControllers;
 
 use EllinghamTech\PHPUserSystem\UserSystem;
 
+/**
+ * @internal
+ */
 class UserMeta
 {
 	/**
@@ -52,7 +58,9 @@ class UserMeta
 	 * @param string $metaName
 	 *
 	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function load(int $user_id, string $metaName) : \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta
 	{
@@ -84,7 +92,8 @@ class UserMeta
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta $userMeta
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserMeta $userMeta) : bool
 	{
@@ -144,7 +153,9 @@ class UserMeta
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta $userMeta
 	 *
 	 * @return bool
-	 * @throws \Exception
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
 	public static function delete(\EllinghamTech\PHPUserSystem\ObjectModels\UserMeta $userMeta) : bool
 	{
