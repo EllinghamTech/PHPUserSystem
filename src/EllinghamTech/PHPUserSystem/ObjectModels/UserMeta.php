@@ -39,10 +39,9 @@ class UserMeta
 	public $meta_name;
 
 	/**
-	 * @var mixed Array for multiple meta values, otherwise any scalar value
-	 * TODO: Should this always be an array?
+	 * @var array
 	 */
-	public $meta_value = null;
+	public $meta_value = array();
 
 	/**
 	 * UserMeta constructor.
@@ -75,7 +74,7 @@ class UserMeta
 	 */
 	public function isMultiValue() : bool
 	{
-		return is_array($this->meta_value);
+		return true;
 	}
 
 	/**
@@ -83,9 +82,7 @@ class UserMeta
 	 */
 	public function makeMultiValue() : void
 	{
-		if($this->isMultiValue()) return;
-
-		$this->meta_name = array($this->meta_name);
+		return;
 	}
 
 	/**
