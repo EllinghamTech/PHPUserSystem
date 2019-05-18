@@ -72,7 +72,8 @@ class UserToken
 	{
 		$tokenObj = new \EllinghamTech\PHPUserSystem\ObjectModels\UserToken();
 
-		$tokenObj->token = random_bytes(32); // What if random_bytes throws an Exception?
+		// Continue to use base 64?
+		$tokenObj->token = base64_encode(random_bytes(32)); // What if random_bytes throws an Exception?
 		$tokenObj->expires = time() + 172800;
 		$tokenObj->valid = true;
 		$tokenObj->token_type = $token_type;
