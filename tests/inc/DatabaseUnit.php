@@ -24,4 +24,45 @@
  * SOFTWARE.
  **************************************************************************************************/
 
-require(__DIR__.'/inc/DatabaseUnit.php');
+use EllinghamTech\Database\SQL\SQLite;
+
+trait DatabaseUnit
+{
+	/**
+	 * @return SQLite
+	 * @throws Exception
+	 */
+	public function phpHelpersWrapperConnection() : SQLite
+	{
+		$pdo = $this->pdoConnection();
+
+		$wrapper = new SQLite();
+		$wrapper->useExistingConnection($pdo);
+		return $wrapper;
+	}
+
+	/**
+	 * Creates a new test SQLite connection with database.
+	 *
+	 * @return PDO
+	 * @throws Exception
+	 */
+	public function pdoConnection() : PDO
+	{
+		$memory_pdo = new PDO('sqlite::memory:');
+
+		if($memory_pdo->exec('PRAGMA foreign_keys = OFF') === false) throw new Exception('Failed to disable foreign keys');
+
+		$sql = file_get_contents(__DIR__ . '/../data/structure.sql');
+		if($sql === false) throw new Exception('Failed to open structure SQL file');
+		if($memory_pdo->exec($sql) === false) throw new Exception('Failed to create database structure');
+
+		$sql = file_get_contents(__DIR__.'/../data/seed.sql');
+		if($sql === false) throw new Exception('Failed to open seed SQL file');
+		if($memory_pdo->exec($sql) === false) throw new Exception('Failed to seed database');
+
+		if($memory_pdo->exec('PRAGMA foreign_keys = ON') === false) throw new Exception('Failed to enable foreign keys');
+
+		return $memory_pdo;
+	}
+}

@@ -24,12 +24,11 @@
  * SOFTWARE.
  **************************************************************************************************/
 
-use EllinghamTech\PHPUserSystem\ObjectModels\User;
 use EllinghamTech\PHPUserSystem\ObjectModels\UserLimit;
-use EllinghamTech\PHPUserSystem\ObjectModels\UserMeta;
 use EllinghamTech\PHPUserSystem\ObjectModels\UserPermission;
 use EllinghamTech\PHPUserSystem\ObjectModels\UserPreference;
 use EllinghamTech\PHPUserSystem\ObjectModels\UserProfile;
+use EllinghamTech\PHPUserSystem\ObjectModels\UserToken;
 use EllinghamTech\PHPUserSystem\UserFactory;
 use EllinghamTech\PHPUserSystem\UserSystem;
 use PHPUnit\Framework\TestCase;
@@ -38,112 +37,116 @@ require('phphead.php');
 
 class UserTest extends TestCase
 {
-	public $username;
+	use DatabaseUnit;
 
-	public function __construct($name = null, array $data = [], $dataName = '')
+	public function setUp()
 	{
-		parent::__construct($name, $data, $dataName);
-		$this->username = 'test_'.uniqid();
-
-		initUserSystem();
-
 		UserSystem::$passwordHashAlgo = PASSWORD_DEFAULT;
-	}
-
-	public function testCreateUser()
-	{
-		$user = UserFactory::newUser();
-
-		$user->user_name = $this->username;
-		$user->setPassword('test_password');
-		$userSave = $user->save();
-
-		$this->assertTrue($userSave);
-
-		// Check fields that should have been populated
-		$this->assertNotNull($user->user_id);
-		$this->assertNotNull($user->user_created);
-		$this->assertTrue($user->verifyPassword('test_password'));
-	}
-
-	public function testGetUserProfile()
-	{
-		$user = UserFactory::newUser();
-
-		$user->user_name = 'test_'.uniqid();
-		$user->setPassword('password');
-		$userSave = $user->save();
-
-		$this->assertTrue($userSave);
-
-		$profile = $user->getUserProfile();
-
-		$this->assertTrue($profile instanceof UserProfile);
-		$this->assertEquals($user->user_id, $profile->user_id);
-		$this->assertNotNull($profile->profile_id);
-	}
-
-	public function testGetUserPermission()
-	{
-		$user = UserFactory::newUser();
-
-		$user->user_name = 'test_'.uniqid();
-		$user->setPassword('password');
-		$userSave = $user->save();
-
-		$this->assertTrue($userSave);
-
-		$permission = $user->getUserPermission('test_permission');
-
-		$this->assertTrue($permission instanceof UserPermission);
-		$this->assertEquals($user->user_id, $permission->user_id);
+		UserSystem::init($this->phpHelpersWrapperConnection());
 	}
 
 	public function testGetUserLimit()
 	{
-		$user = UserFactory::newUser();
-
-		$user->user_name = 'test_'.uniqid();
-		$user->setPassword('password');
-		$userSave = $user->save();
-
-		$this->assertTrue($userSave);
-
+		$user = UserFactory::getUserByUserId(1);
 		$limit = $user->getUserLimit('test_limit');
 
 		$this->assertTrue($limit instanceof UserLimit);
-		$this->assertEquals($user->user_id, $limit->user_id);
+		// The limit should have refreshed, so expecting the refresh value
+		$this->assertEquals(1000, $limit->limit_value);
+
+		$limit_created = $user->getUserLimit('does_not_exist');
+
+		$this->assertTrue($limit_created instanceof UserLimit);
+		$this->assertNull($limit_created->limit_value);
 	}
 
-	public function testGetUserMeta()
+	public function testGetUserProfile()
 	{
-		$user = UserFactory::newUser();
+		$user = UserFactory::getUserByUserId(1);
+		$profile = $user->getUserProfile();
 
-		$user->user_name = 'test_'.uniqid();
-		$user->setPassword('password');
-		$userSave = $user->save();
+		$this->assertTrue($profile instanceof UserProfile);
+		$this->assertEquals('15ce037e43d2c0', $profile->profile_id);
+		$this->assertEquals('Joey', $profile->display_name);
+		$this->assertEquals('Joe Bloggs', $profile->full_name);
+		$this->assertEquals('I am a test user.', $profile->profile_summary);
 
-		$this->assertTrue($userSave);
+		$user = UserFactory::getUserByUserId(2);
+		$profile = $user->getUserProfile();
 
-		$meta = $user->getUserMeta('test_meta');
+		$this->assertTrue($profile instanceof UserProfile);
+		$this->assertTrue(is_string($profile->profile_id));
+	}
 
-		$this->assertTrue($meta instanceof UserMeta);
-		$this->assertEquals($user->user_id, $meta->user_id);
+	public function testSave()
+	{
+		$user = UserFactory::getUserByUserId(1);
+		$user->user_email = 'test';
+		$user->user_mobile = 'mobile';
+		$this->assertTrue($user->save());
+
+		// Get again and verify
+		$user = UserFactory::getUserByUserId(1);
+		$this->assertEquals('test', $user->user_email);
+		$this->assertEquals('mobile', $user->user_mobile);
 	}
 
 	public function testGetUserPreference()
 	{
-		$user = UserFactory::newUser();
+		$user = UserFactory::getUserByUserId(1);
+		$preference = $user->getUserPreference('datetime_format');
 
-		$user->user_name = 'test_'.uniqid();
-		$user->setPassword('password');
-		$userSave = $user->save();
+		$this->assertEquals('Y-m-d H:i:s', $preference->preference_value);
 
-		$this->assertTrue($userSave);
-
-		$preference = $user->getUserPreference('test_preference');
-
+		$preference = $user->getUserPreference('test');
 		$this->assertTrue($preference instanceof UserPreference);
-		$this->assertEquals($user->user_id, $preference->user_id);
+		$this->assertNull($preference->preference_value);
+	}
+
+	public function testCreateUserToken()
+	{
+		$user = UserFactory::getUserByUserId(1);
+
+		$token = $user->createUserToken('test_token');
+
+		$this->assertTrue(is_string($token->token));
+		$this->assertEquals('test_token', $token->token_type);
+	}
+
+	public function testVerifyPassword()
+	{
+		$user = UserFactory::getUserByUserId(1);
+		$this->assertTrue($user->verifyPassword('test'));
+	}
+
+	public function testGetUserMeta()
+	{
+		$user = UserFactory::getUserByUserId(2);
+		$meta = $user->getUserMeta('random');
+
+		$this->assertContains('3.14159', $meta->meta_value);
+		$this->assertContains('1.77245', $meta->meta_value);
+		$this->assertContains('9.86960', $meta->meta_value);
+	}
+
+	public function testGetUserToken()
+	{
+		$user = UserFactory::getUserByUserId(1);
+		$token = $user->getUserToken('L4O2u+xN7Utv9MOV1uMU+SCGgzq/U6kkYydwUiZ7+MU=');
+
+		$this->assertTrue($token instanceof UserToken);
+		$this->assertEquals('forgot_password', $token->token_type);
+
+		$token = $user->getUserToken('2ZE666W4qtvZbijz82VKAJiSYRorm821We+elggxwVg=');
+
+		$this->assertNull($token);
+	}
+
+	public function testGetUserPermission()
+	{
+		$user = UserFactory::getUserByUserId(1);
+		$permission = $user->getUserPermission('test_permission');
+		$this->assertTrue($permission instanceof UserPermission);
+		$this->assertTrue($permission->hasPermission($permission::EXECUTE_PERMISSION));
 	}
 }
