@@ -19,7 +19,7 @@ before_install:
   - travis_retry composer self-update
   - composer install
 
-script: phpunit --bootstrap vendor/autoload.php --coverage-clover=coverage.xml --whitelist=src tests
+script: phpunit --bootstrap tests/bootstrap.php --coverage-clover=coverage.xml --whitelist=src tests
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

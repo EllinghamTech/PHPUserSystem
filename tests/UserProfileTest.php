@@ -28,7 +28,6 @@ use EllinghamTech\PHPUserSystem\ObjectModels\User;
 use EllinghamTech\PHPUserSystem\ObjectModels\UserProfile;
 use PHPUnit\Framework\TestCase;
 
-require('phphead.php');
 
 class UserProfileTest extends TestCase
 {

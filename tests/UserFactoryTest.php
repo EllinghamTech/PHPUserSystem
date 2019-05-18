@@ -30,8 +30,6 @@ use EllinghamTech\PHPUserSystem\ObjectModels\UserToken;
 use EllinghamTech\PHPUserSystem\UserFactory;
 use PHPUnit\Framework\TestCase;
 
-require('phphead.php');
-
 class UserFactoryTest extends TestCase
 {
 	use DatabaseUnit;

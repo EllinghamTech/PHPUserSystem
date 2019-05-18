@@ -26,8 +26,6 @@
 
 namespace UserLimits;
 
-require('phphead.php');
-
 use EllinghamTech\PHPUserSystem\ObjectModels\UserLimit;
 use EllinghamTech\PHPUserSystem\UserFactory;
 use PHPUnit\Framework\TestCase;

@@ -33,8 +33,6 @@ use EllinghamTech\PHPUserSystem\UserFactory;
 use EllinghamTech\PHPUserSystem\UserSystem;
 use PHPUnit\Framework\TestCase;
 
-require('phphead.php');
-
 class UserTest extends TestCase
 {
 	use DatabaseUnit;
