@@ -239,8 +239,10 @@ class User
 
 		$tokenObject = \EllinghamTech\PHPUserSystem\ObjectControllers\UserToken::getToken($token);
 
+		if($tokenObject === null) return null;
 		if($tokenObject->user_id != $this->user_id) return null;
-		else return $tokenObject;
+
+		return $tokenObject;
 	}
 
 	/**

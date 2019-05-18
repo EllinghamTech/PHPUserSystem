@@ -40,18 +40,21 @@ class UserToken
 	 * Gets a token by token value, NULL if token does not exist
 	 *
 	 * @param string $token
+	 * @param bool $allowExpired
 	 *
 	 * @return null|\EllinghamTech\PHPUserSystem\ObjectModels\UserToken
 	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
 	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
-	public static function getToken(string $token) : ?\EllinghamTech\PHPUserSystem\ObjectModels\UserToken
+	public static function getToken(string $token, bool $allowExpired = false) : ?\EllinghamTech\PHPUserSystem\ObjectModels\UserToken
 	{
 		$tokenObj = new \EllinghamTech\PHPUserSystem\ObjectModels\UserToken(null);
 		$db = UserSystem::getDb('UsersTokens');
 
 		$sql = 'SELECT * FROM users_tokens WHERE token=?';
+		if(!$allowExpired) $sql .= ' AND token_expired=0 AND token_expires>'.time();
+
 		$res = $db->performQuery($sql, $token);
 
 		if(!($tokenRow = $res->fetchArray())) return null;
