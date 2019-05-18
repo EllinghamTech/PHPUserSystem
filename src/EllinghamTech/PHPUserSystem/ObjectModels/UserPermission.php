@@ -28,7 +28,7 @@ namespace EllinghamTech\PHPUserSystem\ObjectModels;
 
 use EllinghamTech\PHPUserSystem\InternalAbstract\Permission;
 
-class UserPermission extends Permission
+final class UserPermission extends Permission
 {
 	/** @var int The users ID */
 	public $user_id;

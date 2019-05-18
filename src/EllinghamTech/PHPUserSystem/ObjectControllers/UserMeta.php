@@ -34,7 +34,7 @@ use EllinghamTech\PHPUserSystem\UserSystem;
 /**
  * @internal
  */
-class UserMeta
+final class UserMeta
 {
 	/**
 	 * Creates a new User Meta Entry

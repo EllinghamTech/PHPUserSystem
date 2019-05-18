@@ -29,7 +29,7 @@ namespace EllinghamTech\PHPUserSystem\ObjectModels;
 use EllinghamTech\PHPUserSystem\Exceptions\ObjectNotSaved;
 use EllinghamTech\PHPUserSystem\UserSystem;
 
-class User
+final class User
 {
 	/**
 	 * @var null|int The user ID (null if this is a new user)

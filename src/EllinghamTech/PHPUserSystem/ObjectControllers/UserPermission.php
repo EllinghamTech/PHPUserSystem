@@ -34,7 +34,7 @@ use EllinghamTech\PHPUserSystem\UserSystem;
 /**
  * @internal
  */
-class UserPermission
+final class UserPermission
 {
 	/**
 	 * Creates a new user permission

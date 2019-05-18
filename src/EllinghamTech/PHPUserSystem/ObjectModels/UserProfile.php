@@ -28,7 +28,7 @@ namespace EllinghamTech\PHPUserSystem\ObjectModels;
 
 use EllinghamTech\PHPUserSystem\Exceptions\ObjectNotSaved;
 
-class UserProfile
+final class UserProfile
 {
 	public $user_id = null;
 	public $profile_id = null;

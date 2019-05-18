@@ -34,7 +34,7 @@ use EllinghamTech\PHPUserSystem\UserSystem;
 /**
  * @internal
  */
-class UserToken
+final class UserToken
 {
 	/**
 	 * Gets a token by token value, NULL if token does not exist

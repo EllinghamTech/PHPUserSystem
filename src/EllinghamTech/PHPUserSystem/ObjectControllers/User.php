@@ -34,7 +34,7 @@ use EllinghamTech\PHPUserSystem\UserSystem;
 /**
  * @internal
  */
-class User
+final class User
 {
 	/**
 	 * Loads a user by user ID, returns NULL if the user does not already exist.

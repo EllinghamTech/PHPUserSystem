@@ -34,7 +34,7 @@ use EllinghamTech\PHPUserSystem\UserSystem;
 /**
  * @internal
  */
-class UserProfile
+final class UserProfile
 {
 	/**
 	 * Loads a user profile from the user ID.  If the user does not have a profile, a new

@@ -34,7 +34,7 @@ use EllinghamTech\PHPUserSystem\UserSystem;
 /**
  * @internal
  */
-class UserLimit
+final class UserLimit
 {
 	/**
 	 * Loads a user limit from User ID and Limit Name.  If the limit does not

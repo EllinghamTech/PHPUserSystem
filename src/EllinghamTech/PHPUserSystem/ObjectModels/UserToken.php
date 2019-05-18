@@ -29,7 +29,7 @@ namespace EllinghamTech\PHPUserSystem\ObjectModels;
 use EllinghamTech\PHPUserSystem\Exceptions\InvalidState;
 use EllinghamTech\PHPUserSystem\UserFactory;
 
-class UserToken
+final class UserToken
 {
 	/** @var string The token value */
 	public $token;

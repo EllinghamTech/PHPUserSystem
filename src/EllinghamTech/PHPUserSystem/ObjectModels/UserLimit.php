@@ -28,7 +28,7 @@ namespace EllinghamTech\PHPUserSystem\ObjectModels;
 
 use EllinghamTech\PHPUserSystem\InternalAbstract\Limit;
 
-class UserLimit extends Limit
+final class UserLimit extends Limit
 {
 	/**
 	 * UserLimit constructor.

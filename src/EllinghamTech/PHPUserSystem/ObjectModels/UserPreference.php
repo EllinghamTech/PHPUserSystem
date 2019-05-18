@@ -26,7 +26,7 @@
 
 namespace EllinghamTech\PHPUserSystem\ObjectModels;
 
-class UserPreference
+final class UserPreference
 {
 	/** @var int The users ID */
 	public $user_id;

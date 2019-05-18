@@ -26,7 +26,7 @@
 
 namespace EllinghamTech\PHPUserSystem\ObjectModels;
 
-class UserMeta
+final class UserMeta
 {
 	/**
 	 * @var int The users ID

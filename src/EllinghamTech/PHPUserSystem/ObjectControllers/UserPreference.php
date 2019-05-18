@@ -34,7 +34,7 @@ use EllinghamTech\PHPUserSystem\UserSystem;
 /**
  * @internal
  */
-class UserPreference
+final class UserPreference
 {
 	/**
 	 * Creates a new preference for a user
