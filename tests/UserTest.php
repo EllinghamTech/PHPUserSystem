@@ -39,12 +39,6 @@ class UserTest extends TestCase
 {
 	use DatabaseUnit;
 
-	public function setUp() : void
-	{
-		UserSystem::$passwordHashAlgo = PASSWORD_DEFAULT;
-		UserSystem::init($this->phpHelpersWrapperConnection());
-	}
-
 	public function testGetUserLimit()
 	{
 		$user = UserFactory::getUserByUserId(1);

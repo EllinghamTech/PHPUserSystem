@@ -24,52 +24,43 @@
  * SOFTWARE.
  **************************************************************************************************/
 
-use EllinghamTech\Database\SQL\SQLite;
-use EllinghamTech\PHPUserSystem\UserSystem;
+use EllinghamTech\PHPUserSystem\ObjectModels\User;
+use EllinghamTech\PHPUserSystem\ObjectModels\UserProfile;
+use PHPUnit\Framework\TestCase;
 
-trait DatabaseUnit
+require('phphead.php');
+
+class UserProfileTest extends TestCase
 {
-	public function setUp() : void
+	use DatabaseUnit;
+
+	public function testGetUser()
 	{
-		UserSystem::$passwordHashAlgo = PASSWORD_DEFAULT;
-		UserSystem::init($this->phpHelpersWrapperConnection());
+		$userProfile = \EllinghamTech\PHPUserSystem\ObjectControllers\UserProfile::loadFromUserId(1);
+
+		$this->assertTrue($userProfile instanceof UserProfile);
+		$this->assertEquals('15ce037e43d2c0', $userProfile->profile_id);
+
+		$user = $userProfile->getUser();
+
+		$this->assertTrue($user instanceof User);
+		$this->assertEquals(1, $user->user_id);
+		$this->assertEquals('test_1', $user->user_name);
 	}
 
-	/**
-	 * @return SQLite
-	 * @throws Exception
-	 */
-	protected function phpHelpersWrapperConnection() : SQLite
+	public function testSave()
 	{
-		$pdo = $this->pdoConnection();
+		$userProfile = \EllinghamTech\PHPUserSystem\ObjectControllers\UserProfile::loadFromUserId(2);
 
-		$wrapper = new SQLite();
-		$wrapper->useExistingConnection($pdo);
-		return $wrapper;
-	}
+		$this->assertTrue($userProfile instanceof UserProfile);
 
-	/**
-	 * Creates a new test SQLite connection with database.
-	 *
-	 * @return PDO
-	 * @throws Exception
-	 */
-	protected function pdoConnection() : PDO
-	{
-		$memory_pdo = new PDO('sqlite::memory:');
+		$userProfile->full_name = 'test';
+		$profile_id = $userProfile->profile_id;
+		$userProfile->save();
 
-		if($memory_pdo->exec('PRAGMA foreign_keys = OFF') === false) throw new Exception('Failed to disable foreign keys');
+		$userProfile = \EllinghamTech\PHPUserSystem\ObjectControllers\UserProfile::loadFromProfileId($profile_id);
 
-		$sql = file_get_contents(__DIR__ . '/../data/structure.sql');
-		if($sql === false) throw new Exception('Failed to open structure SQL file');
-		if($memory_pdo->exec($sql) === false) throw new Exception('Failed to create database structure');
-
-		$sql = file_get_contents(__DIR__.'/../data/seed.sql');
-		if($sql === false) throw new Exception('Failed to open seed SQL file');
-		if($memory_pdo->exec($sql) === false) throw new Exception('Failed to seed database');
-
-		if($memory_pdo->exec('PRAGMA foreign_keys = ON') === false) throw new Exception('Failed to enable foreign keys');
-
-		return $memory_pdo;
+		$this->assertEquals(2, $userProfile->user_id);
+		$this->assertEquals('test', $userProfile->full_name);
 	}
 }
