@@ -226,6 +226,7 @@ class User
 
 		switch($field)
 		{
+			case 'user_id':
 			case 'user_email':
 			case 'user_name':
 			case 'user_mobile':
