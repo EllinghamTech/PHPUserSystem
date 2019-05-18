@@ -38,16 +38,17 @@ class UserProfile
 {
 	/**
 	 * Loads a user profile from the user ID.  If the user does not have a profile, a new
-	 * profile is created (and saved as an empty profile).
+	 * profile is created (and saved as an empty profile).  If the user does not exist,
+	 * NULL is returned.
 	 *
-	 * @param int $user_id
+	 * @param int|null $user_id
 	 *
 	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserProfile
 	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
 	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
 	 */
-	public static function loadFromUserId(int $user_id) : \EllinghamTech\PHPUserSystem\ObjectModels\UserProfile
+	public static function loadFromUserId(int $user_id) : ?\EllinghamTech\PHPUserSystem\ObjectModels\UserProfile
 	{
 		$userProfile = new \EllinghamTech\PHPUserSystem\ObjectModels\UserProfile();
 		$userProfile->user_id = $user_id;
@@ -60,7 +61,10 @@ class UserProfile
 		if($row)
 			$userProfile->populate($row);
 		else // If the profile does not exist, it is created
+		{
+			if(!User::checkIfExists('user_id', $userProfile->user_id)) return null;
 			$userProfile->save();
+		}
 
 		return $userProfile;
 	}
