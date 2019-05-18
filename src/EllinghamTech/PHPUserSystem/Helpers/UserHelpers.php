@@ -105,6 +105,8 @@ class UserHelpers
 	 */
 	public static function forgotPasswordByUserId(int $user_id) : ?UserToken
 	{
+		if(!UserController::checkIfExists('user_id', $user_id)) return null;
+
 		$tokenObj = UserTokenController::create('forgot_password');
 		$tokenObj->user_id = $user_id;
 		return $tokenObj;
