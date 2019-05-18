@@ -30,6 +30,7 @@ namespace EllinghamTech\PHPUserSystem\InternalAbstract;
  * An abstract class that defines the Permission constants
  * and basic methods.
  *
+ * @internal
  * @package EllinghamTech\PHPUserSystem\InternalAbstract
  */
 abstract class Permission

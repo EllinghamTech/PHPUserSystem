@@ -29,6 +29,12 @@ namespace EllinghamTech\PHPUserSystem\InternalAbstract;
 use DateInterval;
 use DateTime;
 
+/**
+ * Class Limit
+ *
+ * @internal
+ * @package EllinghamTech\PHPUserSystem\InternalAbstract
+ */
 abstract class Limit
 {
 	/** @var int The User ID */
@@ -77,7 +83,9 @@ abstract class Limit
 	 *
 	 *
 	 * @param null|int $timestamp If timestamp is NULL, uses $this->limit_refresh_when
+	 *
 	 * @return int|null Null of no valid timestamp or current timestamp is already in the future
+	 * @throws \Exception An unhandled exception occurred
 	 */
 	public function getNextValidRefreshTimestamp(?int $timestamp = null) : ?int
 	{
@@ -101,6 +109,12 @@ abstract class Limit
 		return $nextTimestamp;
 	}
 
+	/**
+	 * @param int $timestamp
+	 *
+	 * @return int
+	 * @throws \Exception An unhandled exception occurred
+	 */
 	private function getNextRefreshTimestamp(int $timestamp) : int
 	{
 		$amount = $this->limit_refresh_interval;
