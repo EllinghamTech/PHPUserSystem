@@ -27,6 +27,7 @@
 namespace EllinghamTech\PHPUserSystem;
 
 use EllinghamTech\Database\SQL\Wrapper;
+use EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException;
 use EllinghamTech\PHPUserSystem\Session\ISession;
 use EllinghamTech\PHPUserSystem\Session\PHPSession;
 
@@ -34,8 +35,16 @@ class UserSystem
 {
 	public static $db_tables_prefix = '';
 
+	/**
+	 * @var Wrapper[] An array of db connections
+	 */
 	protected static $db = array();
 
+	/**
+	 * @var null|int Specifies an algorithm to hash the password with, expects a
+	 * PASSWORD_ constant value.  Must exist on the runtime environment.  NULL will
+	 * result in PASSWORD_ARGON2I if support, PASSWORD_DEFAULT otherwise.
+	 */
 	public static $passwordHashAlgo = null;
 
 	/**
@@ -46,10 +55,10 @@ class UserSystem
 	/**
 	 * UserSystem initialiser.
 	 *
-	 * @param Wrapper|Wrapper[] $db
+	 * @param Wrapper|Wrapper[] $db A single database connection, or multiple for each feature
 	 * @param ISession|null $session
 	 */
-	public static function init($db, ISession $session = null) : void
+	public static function init($db, ?ISession $session = null) : void
 	{
 		if(!is_array($db))
 		{
@@ -89,22 +98,30 @@ class UserSystem
 	}
 
 	/**
-	 * @param null|string $for
+	 * @param string $for
 	 *
 	 * @return Wrapper
+	 * @throws ConfigurationException When databases have not been set up correctly
 	 */
-	public static function getDb(?string $for = null) : ?Wrapper
+	public static function getDb(?string $for = null) : Wrapper
 	{
 		if($for != null && isset(self::$db[$for]))
 			return self::$db[$for];
 		else if(isset(self::$db['default']))
 			return self::$db['default'];
 		else
-			return null;
+			throw new ConfigurationException('Configuration does not specify a suitable database connection');
 	}
 
-	public static function session() : ?ISession
+	/**
+	 * Returns the current session object.
+	 *
+	 * @return ISession
+	 * @throws ConfigurationException When initialisation has not occurred or failed
+	 */
+	public static function session() : ISession
 	{
+		if(self::$session === null) throw new ConfigurationException('Not Initialised');
 		return self::$session;
 	}
 };
