@@ -92,6 +92,7 @@ up certain objects correctly.  Other instances can be created by the "parent" in
 ```php
 use EllinghamTech\Database\SQL\MySQL;
 use EllinghamTech\PHPUserSystem\UserSystem;
+use EllinghamTech\PHPUserSystem\UserFactory;
 
 $database = new MySQL(); // Also supports SQLite: new SQLite();
 // Already using PDO?
