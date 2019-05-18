@@ -71,16 +71,10 @@ class UserMeta
 		$sql = 'SELECT * FROM users_meta WHERE user_id=? AND meta_name=?';
 		$res = $db->performQuery($sql, array($user_id, $metaName));
 
-		if($row = $res->fetchArray())
-			$metaObj->populate($row);
-
-		else if($res->numRows() > 1)
+		while($row = $res->fetchArray())
 		{
-			while($row = $res->fetchArray())
-			{
-				$metaObj->meta_name = $row['meta_name'];
-				$metaObj->meta_value[$row['meta_number']] = $row['meta_value'];
-			}
+			$metaObj->meta_name = $row['meta_name'];
+			$metaObj->meta_value[$row['meta_number']] = $row['meta_value'];
 		}
 
 		return $metaObj;
@@ -106,23 +100,15 @@ class UserMeta
 		{
 			$sql = 'INSERT INTO users_meta (user_id, meta_name, meta_value, meta_number) VALUES ';
 
-			if ($userMeta->isMultiValue())
-			{
-				$sql_parts = array();
+			$sql_parts = array();
 
-				foreach ($userMeta->meta_value as $number => $value)
-				{
-					$sql_parts[] = '(?, ?, ?, ?)';
-					$values = array($userMeta->user_id, $userMeta->meta_name, $value, $number);
-				}
-
-				$sql .= implode(', ', $sql_parts);
-			}
-			else
+			foreach ($userMeta->meta_value as $number => $value)
 			{
-				$sql .= '(?, ?, ?, ?)';
-				$values = array($userMeta->user_id, $userMeta->meta_name, $userMeta->meta_value, 0);
+				$sql_parts[] = '(?, ?, ?, ?)';
+				$values = array($userMeta->user_id, $userMeta->meta_name, $value, $number);
 			}
+
+			$sql .= implode(', ', $sql_parts);
 		}
 
 		try
