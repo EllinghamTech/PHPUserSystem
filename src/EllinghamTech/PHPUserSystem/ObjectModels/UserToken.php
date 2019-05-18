@@ -26,6 +26,7 @@
 
 namespace EllinghamTech\PHPUserSystem\ObjectModels;
 
+use EllinghamTech\PHPUserSystem\Exceptions\InvalidState;
 use EllinghamTech\PHPUserSystem\UserFactory;
 
 class UserToken
@@ -86,13 +87,16 @@ class UserToken
 	}
 
 	/**
-	 * Save to database
+	 * Save to database.
 	 *
 	 * @return bool
 	 * @throws \Exception
+	 * @throws InvalidState When the token has not been setup correctly to preform this method
 	 */
 	function save() : bool
 	{
+		if($this->user_id === null) throw new InvalidState('Token User ID is not set');
+
 		return \EllinghamTech\PHPUserSystem\ObjectControllers\UserToken::save($this);
 	}
 
@@ -101,9 +105,12 @@ class UserToken
 	 *
 	 * @return User|null
 	 * @throws \Exception
+	 * @throws InvalidState When the token has not been setup correctly to preform this method
 	 */
 	public function getUser() : ?User
 	{
+		if($this->user_id === null) throw new InvalidState('Token User ID is not set');
+
 		return UserFactory::getUserByUserId($this->user_id);
 	}
 }
