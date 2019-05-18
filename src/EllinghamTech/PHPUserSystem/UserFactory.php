@@ -118,13 +118,15 @@ class UserFactory
 	 *
 	 * @param string $token
 	 *
+	 * @param bool $allowExpired
+	 *
 	 * @return ObjectModels\UserToken|null
 	 * @throws Exceptions\ConfigurationException
 	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
 	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
 	 */
-	public static function getToken(string $token): ?ObjectModels\UserToken
+	public static function getToken(string $token, bool $allowExpired = false): ?ObjectModels\UserToken
 	{
-		return ObjectControllers\UserToken::getToken($token);
+		return ObjectControllers\UserToken::getToken($token, $allowExpired);
 	}
 };
