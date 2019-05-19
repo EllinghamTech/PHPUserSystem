@@ -5,6 +5,10 @@
 [![Latest Unstable Version](https://poser.pugx.org/ellingham-technologies/phpusersystem/v/unstable)](https://packagist.org/packages/ellingham-technologies/phpusersystem)
 [![Tested PHP Versions](https://img.shields.io/badge/php-%3E%3D7.1.0-green.svg)](https://www.php.net/releases/)
 
+<p align="center">
+  <img src="https://ellingham.dev/resources/ellingham_dev_phpusrsys.png" alt="Ellingham Dev">
+</p>
+
 A user management solution for PHP.  It could be said that this is a framework.  But it only deals
 with user management.  The rest is up to you.
 
@@ -21,9 +25,13 @@ Written with PHP 7 and utilising data typing for methods and method parameters.
 - Administrative Tools (a set of pre-built administration helpers)
 
 **Future**
-- Two-factor auth
-- Data Caching
+- [ ] Two-factor auth
+- [ ] API (for mobile apps, etc)
+- [ ] Data Caching
 
+_We will mark off features that are currently in development_
+
+**Random Example**
 ```php
 use EllinghamTech\Database\SQL\MySQL;
 use EllinghamTech\PHPUserSystem\UserSystem;
@@ -34,6 +42,9 @@ $database->connect($host, $user, $pass, $dbname);
 UserSystem::init($database);
 $currentUser = UserSystem::session()->user();
 ```
+
+See the samples/ directory for details on how to implement some of the current features
+in your project.
 
 ## Database support
 Currently supporting MySQL and SQLite using the Database wrappers provided in EllinghamTech PHPHelpers.
@@ -56,27 +67,19 @@ composer require ellingham-technologies/phpusersystem
 
 or add this line to the require section of your composer.json file and use composer to update/install:
 ```
-"ellingham-technologies/phpusersystem": "dev-master",
+"ellingham-technologies/phpusersystem": "^0.4",
 ```
 
-*As this is early days, we should point out that the library is quite limited.  You can use the "dev-master" release (which is the latest and greatest) - but this could always lead to site-breakages if there is an error somewhere in the development library - so don't use on production sites.*
-
 ### Without Composer
+**We do not recommend this option**
 We've included a custom AutoLoader (src/EllinghamTech/PHPUserSystem/AutoLoad.php) that can be used or you can
-include the classes individually as you please. 
-
-Note that his library requires [EllinghamTech/PHPHelpers](https://github.com/EllinghamTech/PHPHelpers).
-**Currently this has not been tested without composer.**
+include the classes individually as you please.   Note that his library requires [EllinghamTech/PHPHelpers](https://github.com/EllinghamTech/PHPHelpers).
 
 ## Dependencies
 - PHP 7.1 or above
 - PDO (SQL/MySQL or SQLite supported)
 - **Composer Managed:**
     - [EllinghamTech/PHPHelpers](https://github.com/EllinghamTech/PHPHelpers). (composer: ellingham-technologies/phphelpers), latest version (>0.4)
-
-The EllinghamTech/PHPUserSystem and EllinghamTech/PHPHelpers namespaces include all of the classes required for this library.
-
-See samples/ for details on how to implement these features on your site.
 
 ## Setup
 This library requires a specific set of tables in the database.  You can find the SQL queries to
@@ -85,9 +88,13 @@ create the tables and recommended indexes in MySQL_tables.md and SQLite_tables.m
 We plan to build an installation and update script in the future.  Until then, you will need to make
 manual changes if the tables change.  Ensure you read the release notes before updating.
 
-## Factory and object initialisation
-Many objects are created by a factory instance.  This removes some of the complexities when setting
-up certain objects correctly.  Other instances can be created by the "parent" instance.
+## Factory, Helpers and object initialisation
+Many objects are created by a factory or helper instance.  This removes some of the complexities when setting
+up certain objects correctly.
+ 
+Some instances are created by their "parent" instance, for example
+a `UserPermission` can be created with the `getUserPermission(string $permission_name)` method on a `User`
+object.
 
 ```php
 use EllinghamTech\Database\SQL\MySQL;
@@ -132,3 +139,6 @@ if($canMakeOnePost)
 }
 
 ```
+
+The `UserFactory` and all the _Helper_ classes use only static methods.  These classes are
+extendable for your own custom capabilities.
