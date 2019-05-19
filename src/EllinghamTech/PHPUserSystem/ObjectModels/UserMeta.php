@@ -56,6 +56,7 @@ final class UserMeta
 
 	/**
 	 * @return bool True if the meta entry has multiple values
+	 * @deprecated Will be removed very soon
 	 */
 	public function isMultiValue() : bool
 	{
@@ -64,6 +65,7 @@ final class UserMeta
 
 	/**
 	 * Makes the entry a multi-value entry
+	 * * @deprecated Will be removed very soon
 	 */
 	public function makeMultiValue() : void
 	{
