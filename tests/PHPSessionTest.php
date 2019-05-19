@@ -51,10 +51,10 @@ class PHPSessionTest extends TestCase
 		);
 
 		UserSystem::session()->init();
-		if(UserSystem::session()->getLastError() !== null) throw new Exception(UserSystem::session()->error);
+		if(UserSystem::session()->getLastError() !== null) throw new Exception(UserSystem::session()->getLastError());
 	}
 
-	public function tearDown()
+	public function tearDown() : void
 	{
 		$_SESSION = null;
 	}
