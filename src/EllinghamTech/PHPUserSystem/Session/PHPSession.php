@@ -73,6 +73,8 @@ class PHPSession implements ISession
 		{
 			$user = UserFactory::getUserByUserId($user_id);
 
+			if($user === null) return null;
+
 			$this->logged_in = true;
 			$this->user_id = $_SESSION['user_id'] = $user->user_id;
 
