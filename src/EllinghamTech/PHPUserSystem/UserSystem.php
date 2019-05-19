@@ -86,6 +86,14 @@ class UserSystem
 		}
 	}
 
+	public static function resetUserSystem() : void
+	{
+		self::$db_tables_prefix = '';
+		self::$db = array();
+		self::$passwordHashAlgo = null;
+		self::$session = null;
+	}
+
 	/**
 	 * @param Wrapper $db
 	 * @param string|null $for
