@@ -28,9 +28,5 @@ namespace EllinghamTech\PHPUserSystem\Helpers;
 
 class AdminHelpers
 {
-	public function __construct()
-	{
-	}
-
 
 };
