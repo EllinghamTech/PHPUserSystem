@@ -52,18 +52,17 @@ class UserLimitsHelpers
 		{
 			$db->transaction_begin();
 
-			$sql = 'SELECT * FROM users_limits WHERE limit_refresh_when<=UNIX_TIMESTAMP() FOR UPDATE';
+			if($db->database_type == 'SQLite')
+				$sql = 'SELECT * FROM users_limits WHERE limit_refresh_when<='.time();
+			else
+				$sql = 'SELECT * FROM users_limits WHERE limit_refresh_when<=UNIX_TIMESTAMP() FOR UPDATE';
+
 			$res = $db->performQuery($sql);
 
 			while($row = $res->fetchArray())
 			{
 				$obj =  new UserLimit($row['user_id']);
-				$obj->limit_name = $row['limit_name'];
-				$obj->limit_value = $row['limit_value'];
-				$obj->limit_refresh_value = $row['limit_refresh_value'];
-				$obj->limit_refresh_when = $row['limit_refresh_when'];
-				$obj->limit_refresh_interval = $row['limit_refresh_interval'];
-				$obj->limit_refresh_interval_unit = $row['limit_refresh_interval_unit'];
+				$obj->populate($row);
 
 				if($obj->needsRefresh())
 					$obj->doRefresh();
