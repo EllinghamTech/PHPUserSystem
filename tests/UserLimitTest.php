@@ -110,4 +110,48 @@ class UserLimitTest extends TestCase
 		$this->assertEquals(100, $limit->limit_value);
 		$this->assertEquals(100, $limit->limit_refresh_value);
 	}
+
+	public function testRefresh_yearly()
+	{
+		$user = UserFactory::getUserByUserId(1);
+		$this->assertTrue($user instanceof User);
+
+		$limit = $user->getUserLimit('refresh_test');
+		$this->assertTrue($limit instanceof UserLimit);
+		$this->assertEquals(1, $limit->user_id);
+
+		$limit->limit_refresh_value = 100;
+		$limit->limit_refresh_when = 1420070400; // 1st Jan 2015, 00:00:00 UTC
+		$limit->limit_refresh_interval = 1;
+		$limit->limit_refresh_interval_unit = $limit::LIMIT_REFRESH_YEAR;
+
+		// Should return 1st Jan of Next year
+		$nextTimestamp = $limit->getNextValidRefreshTimestamp();
+
+		$predictedNextTimestamp = strtotime((date('Y') + 1) . '-01-01 00:00 UTC');
+
+		$this->assertTrue( $nextTimestamp == $predictedNextTimestamp );
+	}
+
+	public function testRefresh_monthly()
+	{
+		$user = UserFactory::getUserByUserId(1);
+		$this->assertTrue($user instanceof User);
+
+		$limit = $user->getUserLimit('refresh_test');
+		$this->assertTrue($limit instanceof UserLimit);
+		$this->assertEquals(1, $limit->user_id);
+
+		$limit->limit_refresh_value = 100;
+		$limit->limit_refresh_when = 1546300800; // 1st Jan 2019, 00:00:00 UTC
+		$limit->limit_refresh_interval = 1;
+		$limit->limit_refresh_interval_unit = $limit::LIMIT_REFRESH_MONTH;
+
+		// Should return 1st Jan of Next year
+		$nextTimestamp = $limit->getNextValidRefreshTimestamp();
+
+		$predictedNextTimestamp = strtotime(date('Y') . '-'.(date('m')+1).'-01 00:00 UTC');
+
+		$this->assertTrue( $nextTimestamp == $predictedNextTimestamp );
+	}
 }
