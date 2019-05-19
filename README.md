@@ -9,7 +9,7 @@
   <img src="https://ellingham.dev/resources/ellingham_dev_phpusrsys.png" alt="Ellingham Dev">
 </p>
 
-A user management solution for PHP.  It could be said that this is a framework.  But it only deals
+A user management solution for PHP.  <strike>It could be said that this is a framework.</strike>  But it only deals
 with user management.  The rest is up to you.
 
 Written with PHP 7 and utilising data typing for methods and method parameters.
@@ -142,3 +142,8 @@ if($canMakeOnePost)
 
 The `UserFactory` and all the _Helper_ classes use only static methods.  These classes are
 extendable for your own custom capabilities.
+
+## Support
+You can get support from https://ellingham.dev/ or by opening a ticket on GitHub.
+
+We will be providing more support in the future after the release of Version 1.0.
