@@ -47,9 +47,9 @@ final class UserMeta
 	 *
 	 * @deprecated use load() which creates a new user meta if it does not exist, preventing unintended overwrites
 	 */
-	public static function create(int $user_id, ?array $meta = null) : \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta
+	public static function create(int $user_id) : \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta
 	{
-		return new \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta($user_id, $meta);
+		return new \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta($user_id);
 	}
 
 	/**
@@ -65,7 +65,7 @@ final class UserMeta
 	 */
 	public static function load(int $user_id, string $metaName) : \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta
 	{
-		$metaObj = new \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta($user_id, null);
+		$metaObj = new \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta($user_id);
 		$metaObj->meta_name = $metaName;
 		$db = UserSystem::getDb('UserMeta');
 

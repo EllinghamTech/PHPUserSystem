@@ -49,24 +49,9 @@ final class UserMeta
 	 * @param int $user_id
 	 * @param array|null $meta
 	 */
-	public function __construct(int $user_id, ?array $meta)
+	public function __construct(int $user_id)
 	{
 		$this->user_id = $user_id;
-
-		if($meta != null)
-			$this->populate($meta);
-	}
-
-	/**
-	 * Populates the object properties from an array of values with the keys:
-	 * meta_name, meta_value
-	 *
-	 * @param array $meta
-	 */
-	public function populate(array $meta) : void
-	{
-		if(isset($meta['meta_name'])) $this->meta_name = $meta['meta_name'];
-		if(isset($meta['meta_value'])) $this->meta_value = $meta['meta_value'];
 	}
 
 	/**
