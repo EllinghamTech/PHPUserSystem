@@ -31,7 +31,7 @@ trait DatabaseUnit
 {
 	public function setUp() : void
 	{
-		UserSystem::$passwordHashAlgo = PASSWORD_DEFAULT;
+		UserSystem::resetUserSystem();
 		UserSystem::init($this->phpHelpersWrapperConnection());
 	}
 
