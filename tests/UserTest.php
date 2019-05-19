@@ -83,6 +83,25 @@ class UserTest extends TestCase
 		$this->assertEquals('mobile', $user->user_mobile);
 	}
 
+	public function testNewUser()
+	{
+		$user = UserFactory::newUser();
+		$user->user_name = 'test_account';
+		$user->user_email = 'test';
+		$user->user_mobile = 'mobile';
+		$this->assertTrue($user->save());
+
+		$user_id = $user->user_id;
+
+		$this->assertNotNull($user_id);
+
+		// Verify
+		$user = UserFactory::getUserByUserId($user_id);
+		$this->assertEquals('test_account', $user->user_name);
+		$this->assertEquals('test', $user->user_email);
+		$this->assertEquals('mobile', $user->user_mobile);
+	}
+
 	public function testGetUserPreference()
 	{
 		$user = UserFactory::getUserByUserId(1);
