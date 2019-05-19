@@ -16,6 +16,8 @@ INSERT INTO users_permissions VALUES(2,'test_permission',31,NULL,NULL);
 -- users_limits
 INSERT INTO users_limits VALUES(1,'test_limit',1,1000,1546300800,1,'day');
 INSERT INTO users_limits VALUES(2,'test_limit',50,100,1546300800,1,'day');
+INSERT INTO users_limits VALUES(3,'test_limit',50,100,1546300800,1,'week');
+INSERT INTO users_limits VALUES(4,'test_limit',50,100,1546300800,1,'quarter');
 
 -- users_preferences
 INSERT INTO users_preferences VALUES(1,'datetime_format','Y-m-d H:i:s');
