@@ -79,4 +79,12 @@ interface ISession extends IBasicSession
 	 * @return int|null
 	 */
 	public function getUserId() : ?int;
+
+	/**
+	 * Returns the last error caused within the session.  Null if there
+	 * has been no error.
+	 *
+	 * @return string|null
+	 */
+	public function getLastError() : ?string;
 };

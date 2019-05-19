@@ -38,6 +38,8 @@ class PHPSessionTest extends TestCase
 
 	public function setUp(): void
 	{
+		$this->baseSetUp();
+
 		$_SESSION = array(
 			'user_id' => 1,
 			'created' => time(),
@@ -48,7 +50,13 @@ class PHPSessionTest extends TestCase
 			)
 		);
 
-		$this->baseSetUp();
+		UserSystem::session()->init();
+		if(UserSystem::session()->getLastError() !== null) throw new Exception(UserSystem::session()->error);
+	}
+
+	public function tearDown()
+	{
+		$_SESSION = null;
 	}
 
 	public function testUserLogin()

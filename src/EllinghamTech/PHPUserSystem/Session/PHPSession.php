@@ -35,6 +35,7 @@ class PHPSession implements ISession
 	protected $user_id = null;
 	protected $session_created = null;
 	protected $session = null;
+	protected $error = null;
 
 	public function init() : void
 	{
@@ -48,16 +49,23 @@ class PHPSession implements ISession
 			$this->logged_in = true;
 			$this->user_id = $_SESSION['user_id'];
 			$this->session_created = new \DateTime();
-			$this->session_created->setTimestamp($_SESSION['created']);
+			$this->session_created->setTimestamp((int)$_SESSION['created']??0);
 			$this->session = $_SESSION;
 		}
 		catch(\Exception $e)
 		{
+			$this->error = $e->getMessage();
+
 			$this->logged_in = false;
 			$this->user_id = null;
 			$this->session_created = null;
 			$this->session = $_SESSION;
 		}
+	}
+
+	public function getLastError() : ?string
+	{
+		return $this->error;
 	}
 
 	public function user() : ?User
