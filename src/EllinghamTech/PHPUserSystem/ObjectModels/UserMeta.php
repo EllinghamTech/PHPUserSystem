@@ -91,6 +91,8 @@ final class UserMeta
 	 * @return bool True on success, false on failure
 	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
 	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \Exception
 	 */
 	public function save() : bool
 	{

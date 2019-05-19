@@ -29,6 +29,7 @@
  */
 namespace EllinghamTech\PHPUserSystem\ObjectControllers;
 
+use EllinghamTech\Exceptions\Data\QueryFailed;
 use EllinghamTech\PHPUserSystem\UserSystem;
 
 /**
@@ -73,21 +74,24 @@ final class UserMeta
 
 		while($row = $res->fetchArray())
 		{
-			$metaObj->meta_name = $row['meta_name'];
-			$metaObj->meta_value[$row['meta_number']] = $row['meta_value'];
+			$metaObj->meta_value[] = $row['meta_value'];
 		}
 
 		return $metaObj;
 	}
 
 	/**
-	 * Deletes the meta data if the value is NULL
+	 * Deletes the meta data if the value is NULL.  This method performs the save within
+	 * a transaction.
 	 *
 	 * @param \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta $userMeta
 	 *
 	 * @return bool
 	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
 	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
+	 * @throws \RuntimeException
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \Exception
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserMeta $userMeta) : bool
 	{
@@ -96,40 +100,37 @@ final class UserMeta
 		$sql = '';
 		$values = array();
 
-		if ($userMeta->meta_value != null)
+		if(!is_array($userMeta->meta_value) && $userMeta->meta_value !== null) throw new \RuntimeException('Meta value must be an array of values');
+		if($userMeta->meta_value === null || count($userMeta->meta_value) == 0) self::delete($userMeta);
+
+		$sql_parts = array();
+
+		foreach ($userMeta->meta_value as $number => $value)
 		{
-			$sql = 'INSERT INTO users_meta (user_id, meta_name, meta_value, meta_number) VALUES ';
-
-			$sql_parts = array();
-
-			foreach ($userMeta->meta_value as $number => $value)
-			{
-				$sql_parts[] = '(?, ?, ?, ?)';
-				$values = array($userMeta->user_id, $userMeta->meta_name, $value, $number);
-			}
-
-			$sql .= implode(', ', $sql_parts);
+			$sql_parts[] = '(?, ?, ?, ?)';
+			$values = array_merge($values, array($userMeta->user_id, $userMeta->meta_name, $value, $number));
 		}
+
+		$sql = 'INSERT INTO users_meta (user_id, meta_name, meta_value, meta_number) VALUES ' . implode(', ', $sql_parts);
 
 		try
 		{
 			$db->transaction_begin();
-
 			$db->performQuery('DELETE FROM users_meta WHERE user_id=? AND meta_name=?', array($userMeta->user_id, $userMeta->meta_name));
-
-			if ($userMeta->meta_value != null)
-			{
-				$db->performQuery($sql, $values);
-			}
-
+			$db->performQuery($sql, $values);
 			$db->transaction_commit();
 
 			return true;
 		}
+		catch (QueryFailed $e)
+		{
+			$db->transaction_rollback();
+			throw $e;
+		}
 		catch (\Exception $e)
 		{
 			$db->transaction_rollback();
-			return false;
+			throw $e;
 		}
 	}
 
