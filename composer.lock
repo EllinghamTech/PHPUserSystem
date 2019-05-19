@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f67996211b9b061d022fc24334d727f1",
+    "content-hash": "bad4838d6ddf82ef3095a55ab2ed4266",
     "packages": [
         {
             "name": "ellingham-technologies/phphelpers",
-            "version": "v0.4.1",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EllinghamTech/PHPHelpers.git",
-                "reference": "a4d42534f1e3f3ac3907f18ee397f68c4158cd4b"
+                "reference": "6ac04da12489de1c755248da1b6097efb828577e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EllinghamTech/PHPHelpers/zipball/a4d42534f1e3f3ac3907f18ee397f68c4158cd4b",
-                "reference": "a4d42534f1e3f3ac3907f18ee397f68c4158cd4b",
+                "url": "https://api.github.com/repos/EllinghamTech/PHPHelpers/zipball/6ac04da12489de1c755248da1b6097efb828577e",
+                "reference": "6ac04da12489de1c755248da1b6097efb828577e",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 }
             ],
             "description": "A general library for PHP containing some common functionality with easy extensibility",
-            "time": "2019-05-18T13:45:08+00:00"
+            "time": "2019-05-19T02:20:43+00:00"
         }
     ],
     "packages-dev": [
