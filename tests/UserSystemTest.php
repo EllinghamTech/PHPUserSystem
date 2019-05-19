@@ -52,20 +52,4 @@ class UserSystemTest extends TestCase
 		$this->assertTrue(UserSystem::getDb('Test') instanceof SQLite);
 		$this->assertTrue(UserSystem::getDb() instanceof SQLite);
 	}
-
-	public function testSession()
-	{
-		$_SESSION['user_id'] = 1;
-		$_SESSION['created'] = 0;
-
-		$session = new PHPSession();
-
-		$wrapper = new SQLite();
-		UserSystem::init($wrapper, $session);
-
-		$this->assertTrue(UserSystem::session() instanceof PHPSession);
-		$this->assertEquals(1, UserSystem::session()->getUserId());
-
-		$_SESSION = array();
-	}
 }
