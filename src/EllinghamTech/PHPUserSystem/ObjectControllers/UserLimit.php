@@ -78,14 +78,7 @@ final class UserLimit
 		}
 
 		if($row)
-		{
-			$obj->limit_name = $row['limit_name'];
-			$obj->limit_value = $row['limit_value'];
-			$obj->limit_refresh_value = $row['limit_refresh_value'];
-			$obj->limit_refresh_when = $row['limit_refresh_when'];
-			$obj->limit_refresh_interval = $row['limit_refresh_interval'];
-			$obj->limit_refresh_interval_unit = $row['limit_refresh_interval_unit'];
-		}
+			$obj->populate($row);
 
 		if($userLimit == null && $obj->needsRefresh())
 			$obj->doRefresh();
