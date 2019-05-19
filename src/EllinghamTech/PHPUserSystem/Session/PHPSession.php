@@ -93,6 +93,12 @@ class PHPSession implements ISession
 
 	public function userLogout() : bool
 	{
+		$_SESSION = null;
+		$this->user_id = null;
+		$this->logged_in = false;
+		$this->session_created = null;
+		$this->session = null;
+
 		@session_destroy();
 		@session_unset();
 		return true;
