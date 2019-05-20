@@ -86,5 +86,5 @@ interface ISession extends IBasicSession
 	 *
 	 * @return string|null
 	 */
-	public function getLastError() : ?string;
+	public function getLastError() : ?\Exception;
 };

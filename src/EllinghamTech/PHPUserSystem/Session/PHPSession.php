@@ -54,7 +54,7 @@ class PHPSession implements ISession
 		}
 		catch(\Exception $e)
 		{
-			$this->error = $e->getMessage();
+			$this->error = $e;
 
 			$this->logged_in = false;
 			$this->user_id = null;
@@ -63,7 +63,7 @@ class PHPSession implements ISession
 		}
 	}
 
-	public function getLastError() : ?string
+	public function getLastError() : ?\Exception
 	{
 		return $this->error;
 	}
@@ -95,6 +95,7 @@ class PHPSession implements ISession
 		}
 		catch(\Exception $e)
 		{
+			$this->error = $e;
 			return false;
 		}
 	}
