@@ -38,21 +38,6 @@ use EllinghamTech\PHPUserSystem\UserSystem;
 final class UserMeta
 {
 	/**
-	 * Creates a new User Meta Entry
-	 *
-	 * @param int $user_id
-	 * @param array|null $meta
-	 *
-	 * @return \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta
-	 *
-	 * @deprecated use load() which creates a new user meta if it does not exist, preventing unintended overwrites
-	 */
-	public static function create(int $user_id) : \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta
-	{
-		return new \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta($user_id);
-	}
-
-	/**
 	 * Note: if no meta data is found and object with a NULL value property is returned
 	 *
 	 * @param int $user_id
