@@ -26,6 +26,7 @@
 
 namespace EllinghamTech\PHPUserSystem\Helpers;
 
+use EllinghamTech\PHPUserSystem\Exceptions\InvalidState;
 use EllinghamTech\PHPUserSystem\ObjectControllers\User as UserController;
 use EllinghamTech\PHPUserSystem\ObjectControllers\UserToken as UserTokenController;
 use EllinghamTech\PHPUserSystem\ObjectModels\User;
@@ -171,5 +172,34 @@ class UserHelpers
 
 		if($user === null) return null;
 		return $user;
+	}
+
+	/**
+	 * If the forgotten password exists, it will load the user, change the password
+	 * then invalidate all forgot_password tokens for the user.
+	 *
+	 * @param string $token
+	 * @param string $new_password
+	 *
+	 * @return bool
+	 * @throws \EllinghamTech\Exceptions\Data\NoConnection
+	 * @throws \EllinghamTech\Exceptions\Data\QueryFailed
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\ConfigurationException
+	 * @throws \EllinghamTech\PHPUserSystem\Exceptions\InvalidState
+	 */
+	public static function changeUserPasswordByForgotPasswordToken(string $token, string $new_password) : bool
+	{
+		$user = self::getUserByForgotPasswordToken($token);
+
+		if($user === null) throw new InvalidState();
+
+		$user->setPassword($new_password);
+
+		if(!$user->save()) throw new InvalidState();
+
+		// User tokens might be in a different database, can we create a multi-connection transaction wrapper?!
+		UserTokenHelpers::expireAllForUserId($user->user_id, 'forgot_password');
+
+		return true;
 	}
 };
