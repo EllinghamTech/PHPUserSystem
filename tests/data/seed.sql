@@ -9,6 +9,12 @@ INSERT INTO users VALUES(5,'test_5','$2y$10$KaCJ/IssRA3bTb09VGJZle6q.uDJEwmtS.mz
 INSERT INTO users_tokens VALUES('L4O2u+xN7Utv9MOV1uMU+SCGgzq/U6kkYydwUiZ7+MU=',1,'forgot_password',1893456000,0);
 INSERT INTO users_tokens VALUES('2ZE666W4qtvZbijz82VKAJiSYRorm821We+elggxwVg=',1,'expired_token',1558190000,0);
 
+INSERT INTO users_tokens VALUES('uE2Fif4xxpvkv/Ysguz0nSLVl1vT42+09WvWdQa8RSI=',1,'forgot_password',1893456000,0);
+INSERT INTO users_tokens VALUES('KQF9Tv8oMUMxazYtotmSu8A1y56xjMVRLZ7IQVZvr0s=',1,'forgot_password',1893456000,0);
+INSERT INTO users_tokens VALUES('ClJyHr0dfCAzUthOqHQt5tdorUt0XgD5C+ITw301K/U=',1,'forgot_password',1893456000,0);
+INSERT INTO users_tokens VALUES('+NM2p9Hf0jDCAX6L81qY+EC8tKKBJyLwvvABaNZQ1BQ=',1,'forgot_password',1893456000,0);
+INSERT INTO users_tokens VALUES('GiN/FaJp1GoZlVojFHtpqtOsUR1WNtffIGAbcWuA1sk=',1,'forgot_password',1893456000,0);
+
 -- users_permissions
 INSERT INTO users_permissions VALUES(1,'test_permission',1,NULL,NULL);
 INSERT INTO users_permissions VALUES(2,'test_permission',31,NULL,NULL);

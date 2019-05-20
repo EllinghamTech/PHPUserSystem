@@ -105,4 +105,14 @@ class UserHelpersTest extends TestCase
 		$this->assertEquals(1, $userToken->user_id);
 		$this->assertEquals('forgot_password', $userToken->token_type);
 	}
+
+	public function testChangeUserPasswordByForgotPasswordToken()
+	{
+		$this->assertTrue(UserHelpers::changeUserPasswordByForgotPasswordToken('L4O2u+xN7Utv9MOV1uMU+SCGgzq/U6kkYydwUiZ7+MU=', 'test_password_314'));
+
+		$user = UserFactory::getUserByUserId(1);
+		$this->assertTrue($user instanceof User);
+		$this->assertEquals(1, $user->user_id);
+		$this->assertTrue($user->verifyPassword('test_password_314'));
+	}
 }
