@@ -52,7 +52,7 @@ final class UserMeta
 	{
 		$metaObj = new \EllinghamTech\PHPUserSystem\ObjectModels\UserMeta($user_id);
 		$metaObj->meta_name = $metaName;
-		$db = UserSystem::getDb('UserMeta');
+		$db = UserSystem::getDb('UsersMeta');
 
 		$sql = 'SELECT * FROM users_meta WHERE user_id=? AND meta_name=?';
 		$res = $db->performQuery($sql, array($user_id, $metaName));
@@ -80,7 +80,7 @@ final class UserMeta
 	 */
 	public static function save(\EllinghamTech\PHPUserSystem\ObjectModels\UserMeta $userMeta) : bool
 	{
-		$db = UserSystem::getDb('UserMeta');
+		$db = UserSystem::getDb('UsersMeta');
 
 		$sql = '';
 		$values = array();
@@ -131,7 +131,7 @@ final class UserMeta
 	 */
 	public static function delete(\EllinghamTech\PHPUserSystem\ObjectModels\UserMeta $userMeta) : bool
 	{
-		$db = UserSystem::getDb('UserMeta');
+		$db = UserSystem::getDb('UsersMeta');
 
 		$res = $db->performQuery('DELETE FROM users_meta WHERE user_id=? AND meta_name=?', array($userMeta->user_id, $userMeta->meta_name));
 		return $res->isSuccess();
