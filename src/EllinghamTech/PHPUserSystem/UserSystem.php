@@ -55,6 +55,30 @@ class UserSystem
 	/**
 	 * UserSystem initialiser.
 	 *
+	 * Initialise the UserSystem.  The first parameter, $db, can be a Wrapper object
+	 * or an array of Wrapper Objects.
+	 *
+	 * Using an array of Wrapper objects allows you to assign different databases to
+	 * different groups of functionality.  The index of the element should be the plural
+	 * name of the Model and the value should be a valid and connected Wrapper object.
+	 *
+	 * Defined:
+	 * - default : If the requested database does not have an assigned wrapper
+	 * - Users : The User model
+	 * - UsersLimits : The User Limit model
+	 * - UsersMeta : The User Meta (data) model
+	 * - UsersPermissions : The User Permission model
+	 * - UsersPreferences : The User Preference model
+	 * - UsersProfiles : The User Profile model
+	 * - UsersTokens : The User Token model
+	 *
+	 * It will also allow custom names that can be used in your application via the
+	 * `UserSystem::getDb(?string $for) : Wrapper` method.
+	 *
+	 * For customised sessions, the second parameter allows you to specify an
+	 * ISession instance to be used.  This method WILL call the ISession init()
+	 * method.
+	 *
 	 * @param Wrapper|Wrapper[] $db A single database connection, or multiple for each feature
 	 * @param ISession|null $session
 	 */
@@ -86,6 +110,10 @@ class UserSystem
 		}
 	}
 
+	/**
+	 * Resets the UserSystem to its default settings.  This has primarily
+	 * been designed for testing purposes.
+	 */
 	public static function resetUserSystem() : void
 	{
 		self::$db_tables_prefix = '';
@@ -106,6 +134,9 @@ class UserSystem
 	}
 
 	/**
+	 * Gets the relevant database by name.  If the database is not found,
+	 * ConfigurationException will be thrown.
+	 *
 	 * @param string $for
 	 *
 	 * @return Wrapper
@@ -122,7 +153,8 @@ class UserSystem
 	}
 
 	/**
-	 * Returns the current session object.
+	 * Returns the current session object.  If the session has not be set,
+	 * ConfigurationException will be thrown.
 	 *
 	 * @return ISession
 	 * @throws ConfigurationException When initialisation has not occurred or failed
