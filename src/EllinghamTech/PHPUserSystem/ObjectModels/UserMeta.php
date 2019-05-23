@@ -55,24 +55,6 @@ final class UserMeta
 	}
 
 	/**
-	 * @return bool True if the meta entry has multiple values
-	 * @deprecated Will be removed very soon
-	 */
-	public function isMultiValue() : bool
-	{
-		return true;
-	}
-
-	/**
-	 * Makes the entry a multi-value entry
-	 * * @deprecated Will be removed very soon
-	 */
-	public function makeMultiValue() : void
-	{
-		return;
-	}
-
-	/**
 	 * Saves the meta entry.
 	 *
 	 * @return bool True on success, false on failure
