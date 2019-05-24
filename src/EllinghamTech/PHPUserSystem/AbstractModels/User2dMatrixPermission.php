@@ -33,7 +33,7 @@ use EllinghamTech\PHPUserSystem\InternalAbstract\Permission;
  *
  * @package EllinghamTech\PHPUserSystem\AbstractModels
  */
-abstract class User2dMatrixPermissions extends Permission
+abstract class User2DMatrixPermission extends Permission
 {
 	/** @var int The user ID */
 	public $user_id;
