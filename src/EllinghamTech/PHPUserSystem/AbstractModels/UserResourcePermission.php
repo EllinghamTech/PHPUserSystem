@@ -37,45 +37,57 @@ use EllinghamTech\PHPUserSystem\InternalAbstract\Permission;
  * This abstract class allows you to implement this custom behaviour in a more controlled way.
  *
  * You should create a new class for each collection.  Example:
- * class UserDepartmentPermissions extends UserResourcePermissions { ... }
- * class UserTopicPermissions extends UserTopicPermissions { ... }
+ * class UserDepartmentPermissions extends UserResourcePermission { ... }
+ * class UserTopicPermissions extends UserResourcePermission { ... }
  *
  * This class is not an exact science but it can help add structure to your project.
  *
- * @deprecated 1.0 Use UserResourcePermissionModel instead
  * @package EllinghamTech\PHPUserSystem\AbstractModels
  */
-abstract class UserResourcePermissions extends Permission
+abstract class UserResourcePermission extends Permission
 {
 	/** @var int The user ID */
 	public $user_id;
+
+	/** @var mixed Resource ID */
+	public $resource_id;
+
+	/** @var null|int Permission Value */
+	public $permission_value = null;
+
+	/** @var null|string The permission name */
+	public $permission_name = null;
 
 	/**
 	 * Sets up the class.  Be sure the parent class implements the base constructor, or
 	 * its behaviour, if you override it.
 	 *
 	 * @param int $user_id
+	 * @param string $permission_name
+	 * @param mixed $resource_id
 	 */
-	public function __construct(int $user_id)
+	public function __construct(int $user_id, string $permission_name, $resource_id)
 	{
 		$this->user_id = $user_id;
+		$this->permission_name = $permission_name;
+		$this->resource_id = $resource_id;
+
+		$this->load();
 	}
 
 	/**
 	 * Checks if the user has the required permissions for a particular resource ID.
 	 *
-	 * @param mixed $resource_id
 	 * @param int|string $requiredPermissionFlags
-	 * @param null|string $permission_name
 	 *
 	 * @return bool True if the user has the required permissions (or more)
 	 */
-	public function hasPermission($requiredPermissionFlags, $resource_id, ?string $permission_name = null) : ?bool
+	public function hasPermission($requiredPermissionFlags) : ?bool
 	{
 		if(is_string($requiredPermissionFlags))
 			$requiredPermissionFlags = (int)$this->permissionStringToInt($requiredPermissionFlags);
 
-		$permissionValue = $this->getPermissionValue($resource_id, $permission_name);
+		$permissionValue = $this->permission_value;
 
 		if($permissionValue == null) return null;
 
@@ -85,34 +97,31 @@ abstract class UserResourcePermissions extends Permission
 	}
 
 	/**
-	 * Return the permission value (integer between 0 and 4095 inclusive) for a particular
-	 * resource ID in the collection.
+	 * Loads the permission model.
 	 *
-	 * @param mixed $resource_id
-	 * @param null|string $permissionName
+	 * Loads the permission model.  This method should change the $permission_value property
+	 * to the assigned permission value.
 	 *
-	 * @return int
+	 * @return bool
 	 */
-	abstract function getPermissionValue($resource_id, ?string $permissionName = null) : ?int;
+	abstract public function load() : bool;
 
 	/**
 	 * Saves the user permission for the resource ID.
 	 *
-	 * @param mixed $resource_id
 	 * @param null|string $permissionName
 	 * @param int $permission_value
 	 *
 	 * @return bool
 	 */
-	abstract function save($resource_id, ?string $permissionName, int $permission_value) : bool;
+	abstract public function save(?string $permissionName, int $permission_value) : bool;
 
 	/**
 	 * Deletes the user permission for the resource ID.
 	 *
-	 * @param mixed $resource_id
 	 * @param null|string $permissionName
 	 *
 	 * @return bool
 	 */
-	abstract function delete($resource_id, ?string $permissionName = null) : bool;
+	abstract public function delete(?string $permissionName = null) : bool;
 };
