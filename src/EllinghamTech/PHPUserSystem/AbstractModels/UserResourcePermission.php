@@ -101,10 +101,8 @@ abstract class UserResourcePermission extends Permission
 	 *
 	 * Loads the permission model.  This method should change the $permission_value property
 	 * to the assigned permission value.
-	 *
-	 * @return bool
 	 */
-	abstract public function load() : bool;
+	abstract public function load() : void;
 
 	/**
 	 * Saves the user permission for the resource ID.
