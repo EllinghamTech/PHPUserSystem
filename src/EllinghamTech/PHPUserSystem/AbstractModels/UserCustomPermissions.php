@@ -28,6 +28,52 @@ namespace EllinghamTech\PHPUserSystem\AbstractModels;
 
 use EllinghamTech\PHPUserSystem\InternalAbstract\Permission;
 
+/**
+ * @package EllinghamTech\PHPUserSystem\AbstractModels
+ */
 abstract class UserCustomPermissions extends Permission
 {
+	/** @var int The user ID */
+	public $user_id;
+
+	/** @var mixed Resource ID */
+	public $resource_id;
+
+	/** @var null|int Permission Value */
+	public $permission_value = null;
+
+	/** @var null|string The permission name */
+	public $permission_name = null;
+
+	/**
+	 * Checks if the user has the required permission.
+	 *
+	 * @param int|string $requiredPermissionFlags
+	 *
+	 * @return bool True if the user has the required permissions (or more)
+	 */
+	public function hasPermission($requiredPermissionFlags) : ?bool
+	{
+		if(is_string($requiredPermissionFlags))
+			$requiredPermissionFlags = (int)$this->permissionStringToInt($requiredPermissionFlags);
+
+		if($this->permission_value == null) return null;
+		if($this->permission_value >= (int)$requiredPermissionFlags) return true;
+
+		return false;
+	}
+
+	/**
+	 * Saves the user permission.
+	 *
+	 * @return bool
+	 */
+	abstract public function save() : bool;
+
+	/**
+	 * Deletes the user permission.
+	 *
+	 * @return bool
+	 */
+	abstract public function delete() : bool;
 };
