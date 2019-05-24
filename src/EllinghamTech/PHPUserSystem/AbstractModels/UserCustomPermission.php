@@ -31,7 +31,7 @@ use EllinghamTech\PHPUserSystem\InternalAbstract\Permission;
 /**
  * @package EllinghamTech\PHPUserSystem\AbstractModels
  */
-abstract class UserCustomPermissions extends Permission
+abstract class UserCustomPermission extends Permission
 {
 	/** @var int The user ID */
 	public $user_id;
