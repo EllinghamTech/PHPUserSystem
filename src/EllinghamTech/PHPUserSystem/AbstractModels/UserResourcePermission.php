@@ -72,7 +72,7 @@ abstract class UserResourcePermission extends Permission
 		$this->permission_name = $permission_name;
 		$this->resource_id = $resource_id;
 
-		$this->load();
+		$this->init();
 	}
 
 	/**
@@ -102,7 +102,7 @@ abstract class UserResourcePermission extends Permission
 	 * Loads the permission model.  This method should change the $permission_value property
 	 * to the assigned permission value.
 	 */
-	abstract public function load() : void;
+	abstract protected function init() : void;
 
 	/**
 	 * Saves the user permission for the resource ID.
