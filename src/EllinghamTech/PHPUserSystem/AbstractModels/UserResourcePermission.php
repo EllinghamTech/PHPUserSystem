@@ -107,19 +107,14 @@ abstract class UserResourcePermission extends Permission
 	/**
 	 * Saves the user permission for the resource ID.
 	 *
-	 * @param null|string $permissionName
-	 * @param int $permission_value
-	 *
 	 * @return bool
 	 */
-	abstract public function save(?string $permissionName, int $permission_value) : bool;
+	abstract public function save() : bool;
 
 	/**
 	 * Deletes the user permission for the resource ID.
 	 *
-	 * @param null|string $permissionName
-	 *
 	 * @return bool
 	 */
-	abstract public function delete(?string $permissionName = null) : bool;
+	abstract public function delete() : bool;
 };
