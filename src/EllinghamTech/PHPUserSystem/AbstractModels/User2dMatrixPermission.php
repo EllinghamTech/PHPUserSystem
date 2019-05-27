@@ -54,15 +54,16 @@ abstract class User2DMatrixPermission extends Permission
 	 * @param string $permission_name
 	 * @param $resource_id_1
 	 * @param $resource_id_2
+	 * @param bool $initialise (default: true) If false, the constructor does not call the init() method
 	 */
-	public function __construct(int $user_id, string $permission_name, $resource_id_1, $resource_id_2)
+	public function __construct(int $user_id, string $permission_name, $resource_id_1, $resource_id_2, bool $initialise = true)
 	{
 		$this->user_id = $user_id;
 		$this->permission_name = $permission_name;
 		$this->resource_id_1 = $resource_id_1;
 		$this->resource_id_2 = $resource_id_2;
 
-		$this->init();
+		if($initialise) $this->init();
 	}
 
 	/**

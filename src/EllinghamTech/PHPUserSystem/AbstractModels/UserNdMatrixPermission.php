@@ -51,14 +51,15 @@ abstract class UserNDMatrixPermission extends Permission
 	 * @param int $user_id
 	 * @param string $permission_name
 	 * @param array $resource_ids
+	 * @param bool $initialise (default: true) If false, the constructor does not call the init() method
 	 */
-	public function __construct(int $user_id, string $permission_name, array $resource_ids)
+	public function __construct(int $user_id, string $permission_name, array $resource_ids, bool $initialise = true)
 	{
 		$this->user_id = $user_id;
 		$this->permission_name = $permission_name;
 		$this->resource_ids = $resource_ids;
 
-		$this->init();
+		if($initialise) $this->init();
 	}
 
 	/**

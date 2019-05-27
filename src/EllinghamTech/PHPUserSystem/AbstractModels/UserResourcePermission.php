@@ -65,14 +65,15 @@ abstract class UserResourcePermission extends Permission
 	 * @param int $user_id
 	 * @param string $permission_name
 	 * @param mixed $resource_id
+	 * @param bool $initialise (default: true) If false, the constructor does not call the init() method
 	 */
-	public function __construct(int $user_id, string $permission_name, $resource_id)
+	public function __construct(int $user_id, string $permission_name, $resource_id, bool $initialise = true)
 	{
 		$this->user_id = $user_id;
 		$this->permission_name = $permission_name;
 		$this->resource_id = $resource_id;
 
-		$this->init();
+		if($initialise) $this->init();
 	}
 
 	/**
