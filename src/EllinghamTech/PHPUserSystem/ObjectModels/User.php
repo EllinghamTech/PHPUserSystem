@@ -246,7 +246,7 @@ final class User
 	}
 
 	/**
-	 * Creates a user token for this user.
+	 * Creates a saved user token for this user.
 	 *
 	 * @param string $token_type
 	 *
@@ -260,6 +260,7 @@ final class User
 
 		$tokenObj = \EllinghamTech\PHPUserSystem\ObjectControllers\UserToken::create($token_type);
 		$tokenObj->user_id = $this->user_id;
+		$tokenObj->save();
 		return $tokenObj;
 	}
 }
