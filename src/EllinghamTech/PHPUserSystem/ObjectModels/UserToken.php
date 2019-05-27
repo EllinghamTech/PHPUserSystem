@@ -44,7 +44,7 @@ final class UserToken
 	public $expires;
 
 	/** @var bool True if valid, false otherwise */
-	public $valid = false;
+	public $valid = true;
 
 	/**
 	 * UserToken constructor.
