@@ -84,7 +84,7 @@ interface ISession extends IBasicSession
 	 * Returns the last error caused within the session.  Null if there
 	 * has been no error.
 	 *
-	 * @return string|null
+	 * @return \Exception|null
 	 */
 	public function getLastError() : ?\Exception;
 };
