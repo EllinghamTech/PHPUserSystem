@@ -110,6 +110,7 @@ class UserHelpers
 
 		$tokenObj = UserTokenController::create('forgot_password');
 		$tokenObj->user_id = $user_id;
+		$tokenObj->save();
 		return $tokenObj;
 	}
 
