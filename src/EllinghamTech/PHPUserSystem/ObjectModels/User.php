@@ -249,17 +249,19 @@ final class User
 	 * Creates a saved user token for this user.
 	 *
 	 * @param string $token_type
+	 * @param int $expires_after Token expires after (number of sections), default 2 days
 	 *
 	 * @return UserToken
 	 * @throws ObjectNotSaved
 	 * @throws \Exception
 	 */
-	public function createUserToken(?string $token_type = null) : UserToken
+	public function createUserToken(?string $token_type = null, int $expires_after=172800) : UserToken
 	{
 		if($this->user_id == null) throw new ObjectNotSaved();
 
 		$tokenObj = \EllinghamTech\PHPUserSystem\ObjectControllers\UserToken::create($token_type);
 		$tokenObj->user_id = $this->user_id;
+		$tokenObj->expires = time() + $expires_after;
 		$tokenObj->save();
 		return $tokenObj;
 	}
