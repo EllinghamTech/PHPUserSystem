@@ -99,7 +99,7 @@ final class UserToken
 		$db = UserSystem::getDb('UsersTokens');
 
 		$sql = 'REPLACE INTO users_tokens (token, user_id, token_type, token_expires, token_expired) VALUES (?, ?, ?, ?, ?)';
-		$res = $db->performQuery($sql, array($userToken->token, $userToken->user_id, $userToken->token_type, $userToken->expires, $userToken->valid));
+		$res = $db->performQuery($sql, array($userToken->token, $userToken->user_id, $userToken->token_type, $userToken->expires, !$userToken->valid));
 
 		return $res->isSuccess();
 	}
