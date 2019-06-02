@@ -1,5 +1,5 @@
 # Security Policy
-We take security seriously.  We recommend keeping your PHPUserSystem upto date for the latest security updates.
+We take security seriously.  We recommend keeping your copy upto date for the latest security updates.
 
 We also recommend that you _do not_ use development versions in production, as these versions are more likely to contain security issues.
 
