@@ -67,7 +67,7 @@ composer require ellingham-technologies/phpusersystem
 
 or add this line to the require section of your composer.json file and use composer to update/install:
 ```
-"ellingham-technologies/phpusersystem": "^0.4",
+"ellingham-technologies/phpusersystem": "@stable",
 ```
 
 ### Without Composer
@@ -82,8 +82,8 @@ include the classes individually as you please.   Note that his library requires
     - [EllinghamTech/PHPHelpers](https://github.com/EllinghamTech/PHPHelpers). (composer: ellingham-technologies/phphelpers), latest version (>0.4)
 
 ## Setup
-This library requires a specific set of tables in the database.  You can find the SQL queries to
-create the tables and recommended indexes in MySQL_tables.md and SQLite_tables.md.
+This library requires a specific set of tables in the database.  More details can be found in DATABASE.md.  You
+can find the necessary `CREATE TABLE` queries in the `sql/` directory.
 
 We plan to build an installation and update script in the future.  Until then, you will need to make
 manual changes if the tables change.  Ensure you read the release notes before updating.
