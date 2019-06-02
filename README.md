@@ -1,6 +1,6 @@
-# Ellingham Tech: PHP User System
-[![Build Status](https://travis-ci.org/EllinghamTech/PHPUserSystem.svg?branch=master)](https://travis-ci.org/EllinghamTech/PHPUserSystem)
-[![codecov](https://codecov.io/gh/EllinghamTech/PHPUserSystem/branch/master/graph/badge.svg)](https://codecov.io/gh/EllinghamTech/PHPUserSystem)
+# Ellingham Tech: User System for PHP
+[![Build Status](https://travis-ci.org/EllinghamTech/UserSystemForPHP.svg?branch=master)](https://travis-ci.org/EllinghamTech/UserSystemForPHP)
+[![codecov](https://codecov.io/gh/EllinghamTech/UserSystemForPHP/branch/master/graph/badge.svg)](https://codecov.io/gh/EllinghamTech/UserSystemForPHP)
 [![Latest Stable Version](https://poser.pugx.org/ellingham-technologies/phpusersystem/v/stable)](https://packagist.org/packages/ellingham-technologies/phpusersystem)
 [![Latest Unstable Version](https://poser.pugx.org/ellingham-technologies/phpusersystem/v/unstable)](https://packagist.org/packages/ellingham-technologies/phpusersystem)
 [![Tested PHP Versions](https://img.shields.io/badge/php-%3E%3D7.1.0-green.svg)](https://www.php.net/releases/)
